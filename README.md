@@ -73,20 +73,8 @@ new run" button. Extra runs are safe: the ledger means a second run orders nothi
 | **LangGraph for the pause, the ledger for the truth.** | The pause survives a restart; re-running a step can't send an order twice. | Two stores to understand. |
 | **Small model (Haiku 4.5).** | Explanation within tight guardrails; evals pass at about $0.15 per run. | Needs the validators; a bigger model is a one-line switch. |
 
-## What can go wrong, and what happens
-
-- **Bad or missing data:** that part is blocked and reported, never treated as 0 (which would trigger a large order).
-- **SAP times out or the process crashes mid-call:** the order becomes UNKNOWN, is never re-sent, and the part is
-  blocked until a person checks SAP.
-- **SAP confirms the wrong item or quantity, or refuses:** a mismatch is blocked for a person; a refusal is proposed
-  again next run.
-- **Stock changes before sending:** the order is re-checked on fresh data and held back if it is no longer right.
-- **The LLM is slow, down or wrong:** after one retry the fixed template is used and automatic orders go to a person.
-- **Text in the data tries to instruct the AI:** a code check and the LLM both flag it; the order goes to a person,
-  quantity unchanged.
-
-All of this is tested: 136 tests (unit, property-based, fault-injection against a fake MCP server), a 19-case LLM
-eval suite with 5 prompt-injection cases (`tests/evals/`), and a recorded end-to-end
+Everything above is tested: 136 tests (unit, property-based, fault-injection against a fake MCP server), a
+19-case LLM eval suite with 5 prompt-injection cases (`tests/evals/`), and a recorded end-to-end
 [sandbox run](docs/sample_run/README.md).
 
 ## Adapting it to another customer or domain
