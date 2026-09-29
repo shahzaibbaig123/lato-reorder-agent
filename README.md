@@ -34,18 +34,25 @@ flowchart LR
 
 ## The reorder policy
 
-A part matters by **impact × urgency**. Impact is how many bike models stop if it runs out (fan-out *f*), which
-also stands in for consumption, since there is no demand data. **CRITICAL** = used by ≥ 50% of models; SHARED =
-2+ models; SINGLE = 1. Urgency is how long the stock lasts: cycle demand *D = K × units-per-bike × f*, reorder
-when *on hand + on order ≤ (1 + safety) × D*, and order up to *(2 + safety) × D*. Safety is 1 cycle for CRITICAL,
-½ for SHARED, 0 for SINGLE. *K* (builds per model per cycle) is an assumption, set to 5 at calibration. On the live
-data the part with the **lowest** stock (a derailleur, 7 left, one model) is *not* ordered, while the fork (16 left,
-all 9 models) gets 119 and goes to a human.
+A part matters by **impact × urgency**.
 
-**Routing:** strictest rule wins, BLOCK > HUMAN > AUTO. CRITICAL, stockouts, orders over 100 units, anything
-flagged and anything the LLM raises a concern about go to a human. Small orders of non-critical parts go through
-automatically, within 5 POs / 300 units per run. Invalid data, an order above 300 units or a part with an
-unresolved earlier PO is blocked.
+| | Rule |
+|---|---|
+| **Impact** | Fan-out *f*: how many bike models stop if the part runs out. With no demand data, it also stands in for consumption. |
+| **Tier** | **CRITICAL**: used by ≥ 50% of models, 1 cycle of safety stock. **SHARED**: 2+ models, ½ cycle. **SINGLE**: 1 model, none. |
+| **Demand per cycle** | *D = K × units-per-bike × f*. *K* (builds per model per cycle) is an assumption, set to 5 at calibration. |
+| **When to order** | When *on hand + on order ≤ (1 + safety) × D* (the reorder point). |
+| **How much** | Enough to reach *(2 + safety) × D* (the order-up-to level). |
+
+**On the live data:** the fork (16 in stock, all 9 models) has *D* = 5 × 1 × 9 = 45, a reorder point of 90 and an
+order-up-to level of 135, so it gets **119** and goes to a human. The derailleur with the **lowest** stock (7, one
+model) has a reorder point of 5, so it is *not* ordered: low stock alone doesn't make a part critical.
+
+**Routing** (strictest wins, BLOCK > HUMAN > AUTO):
+- **AUTO:** small orders of non-critical parts, in stock and unflagged, within 5 POs / 300 units per run.
+- **HUMAN:** critical parts, stockouts, orders over 100 units, anything flagged, anything the LLM raises a concern
+  about, and anything over the per-run budget.
+- **BLOCK:** invalid data, an order above 300 units, or a part with an unresolved earlier PO.
 
 These limits are settings in `policy.yaml`, not constants: 100 sits above the largest non-critical order (66); 300
 is about 2× the largest order-up-to level (135), because the SAP tool itself accepted a 1,000,000-unit order; the
