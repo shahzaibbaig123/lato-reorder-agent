@@ -100,8 +100,20 @@ eval suite with 5 prompt-injection cases (`tests/evals/`), and a recorded end-to
 | Approver identity | SSO and a Procurement role instead of the configured name |
 | Different LLM | `LATO_LLM_MODEL`, then re-run the evals |
 
-What does **not** change: the ledger, the submit protocol, the rule that the LLM can only send orders to a human,
-and the evals. That is the reusable core.
+### Reusing the architecture
+
+Five building blocks carry over to any agent that must take a money-committing action exactly once:
+
+| Building block | Code | Reuse |
+|---|---|---|
+| MCP client with a tool-contract check | `mcp_gateway/` | As is; change tool and field names |
+| Policy engine: data in → decision, rule IDs and derivation out | `policy/` | Keep the shape, replace the rules |
+| LLM analyst: trusted facts vs untrusted text, structured output, validators, escalate-only, template fallback | `llm/`, `prompts/` | As is; rewrite the prompt wording and eval cases |
+| Ledger + write-ahead submit: one open action per item, compare-and-set, UNKNOWN, re-check before sending | `ledger/`, `execution/` | As is |
+| Approval pause and UI | `orchestrator/`, `approval/` | As is, or a Mendix Workflow and task inbox |
+
+Examples: refunds, supplier payments, maintenance work orders. The rules change; the ledger, the submit protocol,
+the human routing and the escalate-only LLM stay.
 
 ## Known limits and next steps
 
