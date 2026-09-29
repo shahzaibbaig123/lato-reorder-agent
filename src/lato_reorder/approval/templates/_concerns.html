@@ -1,0 +1,5 @@
+{% if concerns %}
+<div class="small">Analyst concerns:
+  <ul>{% for c in concerns %}<li><code>{{ c.code.value }}</code> “{{ c.evidence }}”{% if c.escalate %} <span class="badge HUMAN">sent to a human</span>{% endif %}</li>{% endfor %}</ul>
+</div>
+{% endif %}

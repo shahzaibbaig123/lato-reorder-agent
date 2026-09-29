@@ -1,0 +1,22 @@
+<div id="intent-{{ it.intent_id }}">
+  <strong>{{ it.item_name }}</strong>
+  <span class="badge {{ it.status.value }}">{{ it.status.value }}</span>
+  <span class="muted small">· {{ it.supplier }} · recommended {{ it.engine_quantity }}
+    {% if it.quantity != it.engine_quantity %}· approved {{ it.quantity }}{% endif %}
+    {% if it.sap_po_number %}· PO <code>{{ it.sap_po_number }}</code>{% endif %}</span>
+  {% if it.status == S.PENDING_APPROVAL %}
+  <div>
+    <form class="inline" hx-post="/intents/{{ it.intent_id }}/approve" hx-target="#intent-{{ it.intent_id }}" hx-swap="outerHTML">
+      <input type="number" name="quantity" value="{{ it.quantity }}" min="1" aria-label="Quantity">
+      <input type="text" name="reason" placeholder="Reason (required if you change the quantity)">
+      <label class="small"><input type="checkbox" name="override" value="true"> override</label>
+      <button class="primary" type="submit">Approve</button>
+    </form>
+    <form class="inline" hx-post="/intents/{{ it.intent_id }}/reject" hx-target="#intent-{{ it.intent_id }}" hx-swap="outerHTML">
+      <input type="text" name="reason" placeholder="Reason for rejecting" required>
+      <button class="danger" type="submit">Reject</button>
+    </form>
+  </div>
+  {% endif %}
+  {% if error %}<div class="error">{{ error }}</div>{% endif %}
+</div>

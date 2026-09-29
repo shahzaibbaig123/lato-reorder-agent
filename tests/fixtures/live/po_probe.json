@@ -1,0 +1,154 @@
+[
+  {
+    "text": "Purchase order Gel-905 for Gel Comfort Seat from Selle Italia created for 5 items.",
+    "is_error": false,
+    "raw": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Purchase order Gel-905 for Gel Comfort Seat from Selle Italia created for 5 items."
+        }
+      ],
+      "isError": false
+    },
+    "case": "valid",
+    "arguments": {
+      "ItemName": "Gel Comfort Seat",
+      "Quantity": 5
+    },
+    "latency_ms": 113
+  },
+  {
+    "text": "Purchase order Gel-771 for Gel Comfort Seat from Selle Italia created for 5 items.",
+    "is_error": false,
+    "raw": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Purchase order Gel-771 for Gel Comfort Seat from Selle Italia created for 5 items."
+        }
+      ],
+      "isError": false
+    },
+    "case": "valid_repeat",
+    "arguments": {
+      "ItemName": "Gel Comfort Seat",
+      "Quantity": 5
+    },
+    "latency_ms": 103
+  },
+  {
+    "text": "No part named 'gel comfort seat' found. Call GetPartDetails for valid names.",
+    "is_error": false,
+    "raw": {
+      "content": [
+        {
+          "type": "text",
+          "text": "No part named 'gel comfort seat' found. Call GetPartDetails for valid names."
+        }
+      ],
+      "isError": false
+    },
+    "case": "name_case_variant",
+    "arguments": {
+      "ItemName": "gel comfort seat",
+      "Quantity": 1
+    },
+    "latency_ms": 108
+  },
+  {
+    "text": "No part named 'Nonexistent Test Part' found. Call GetPartDetails for valid names.",
+    "is_error": false,
+    "raw": {
+      "content": [
+        {
+          "type": "text",
+          "text": "No part named 'Nonexistent Test Part' found. Call GetPartDetails for valid names."
+        }
+      ],
+      "isError": false
+    },
+    "case": "unknown_name",
+    "arguments": {
+      "ItemName": "Nonexistent Test Part",
+      "Quantity": 1
+    },
+    "latency_ms": 103
+  },
+  {
+    "text": "Quantity is required and must be a positive integer.",
+    "is_error": false,
+    "raw": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Quantity is required and must be a positive integer."
+        }
+      ],
+      "isError": false
+    },
+    "case": "qty_zero",
+    "arguments": {
+      "ItemName": "Gel Comfort Seat",
+      "Quantity": 0
+    },
+    "latency_ms": 102
+  },
+  {
+    "text": "Quantity is required and must be a positive integer.",
+    "is_error": false,
+    "raw": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Quantity is required and must be a positive integer."
+        }
+      ],
+      "isError": false
+    },
+    "case": "qty_negative",
+    "arguments": {
+      "ItemName": "Gel Comfort Seat",
+      "Quantity": -3
+    },
+    "latency_ms": 99
+  },
+  {
+    "text": "Error occurred during tool call: For input string: \"2.5\"",
+    "is_error": true,
+    "raw": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Error occurred during tool call: For input string: \"2.5\""
+        }
+      ],
+      "isError": true
+    },
+    "case": "qty_decimal",
+    "arguments": {
+      "ItemName": "Gel Comfort Seat",
+      "Quantity": 2.5
+    },
+    "latency_ms": 101
+  },
+  {
+    "text": "Purchase order Gel-811 for Gel Comfort Seat from Selle Italia created for 1000000 items.",
+    "is_error": false,
+    "raw": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Purchase order Gel-811 for Gel Comfort Seat from Selle Italia created for 1000000 items."
+        }
+      ],
+      "isError": false
+    },
+    "case": "qty_huge",
+    "arguments": {
+      "ItemName": "Gel Comfort Seat",
+      "Quantity": 1000000
+    },
+    "latency_ms": 100
+  }
+]

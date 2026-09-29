@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}PO ledger{% endblock %}
+{% block content %}
+<h1>PO ledger</h1>
+<p class="muted small">Every purchase-order intent and its state. At most one open intent per part is enforced by the database.</p>
+<div class="table-wrap">
+<table>
+  <tr><th>Part</th><th>Qty</th><th>Status</th><th>SAP PO</th><th>Run</th><th>Updated (UTC)</th><th>Action</th></tr>
+  {% for it in intents %}
+  <tr>
+    <td>{{ it.item_name }}<div class="muted small">{{ it.route }} · {{ it.supplier }}</div></td>
+    <td>{{ it.quantity }}{% if it.quantity != it.engine_quantity %} <span class="muted small">(rec. {{ it.engine_quantity }})</span>{% endif %}</td>
+    <td><span class="badge {{ it.status.value }}">{{ it.status.value }}</span></td>
+    <td>{% if it.sap_po_number %}<code>{{ it.sap_po_number }}</code>{% endif %}
+      {% if it.raw_response and it.status in UNRESOLVED %}<div class="small muted">{{ it.raw_response[:120] }}</div>{% endif %}</td>
+    <td><a href="/runs/{{ it.run_id }}">{{ it.run_id }}</a></td>
+    <td>{{ it.updated_at[:16] }}</td>
+    <td>
+      {% if it.status in UNRESOLVED %}
+      <form class="inline" method="post" action="/intents/{{ it.intent_id }}/resolve">
+        <input type="text" name="sap_po_number" placeholder="SAP PO number, or blank if none">
+        <button type="submit">Reconcile</button>
+      </form>
+      {% elif it.status == S.SUBMITTED %}
+      <form class="inline" method="post" action="/intents/{{ it.intent_id }}/received"><button type="submit">Mark received</button></form>
+      {% endif %}
+      <details><summary class="small">history</summary>
+        <div hx-get="/intents/{{ it.intent_id }}/events" hx-trigger="toggle from:closest details once" class="small muted">loading…</div>
+      </details>
+    </td>
+  </tr>
+  {% else %}
+  <tr><td colspan="7" class="muted">No intents yet.</td></tr>
+  {% endfor %}
+</table>
+</div>
+{% endblock %}

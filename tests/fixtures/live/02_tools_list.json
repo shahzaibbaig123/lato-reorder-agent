@@ -1,0 +1,52 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "result": {
+    "tools": [
+      {
+        "name": "GetProductDetails",
+        "description": "Finds all bicycle details and returns the information in following structure:\nTitle: Bicycle name\nDescription: Features or purpose\nReleaseDate: ISO 8601 timestamp\nDimensions: \"Length x Width x Height\"",
+        "inputSchema": {
+          "type": "object",
+          "properties": {},
+          "$defs": {},
+          "definitions": {}
+        },
+        "_meta": {}
+      },
+      {
+        "name": "GetPartDetails",
+        "description": "Finds all bicycle part details and returns the information in the following structure:\n\nTitle: The name of the part.\nDescription: A brief description of the part's function or features.\nReleaseDate: The date the part was released, formatted as an ISO 8601 timestamp.\nDimensions: The dimensions of the part in a \"Length x Width x Height\" format.\nWeight: The weight of the part in kilograms.\nStockQuantity: The number of items available in stock.\nSupplier: The name of the supplier or manufacturer of the part.\nImageURL: A URL linking to an image of the part.\nBoxDimensions: The dimensions of the box containing the part, in a \"Length x Width x Height\" format.\nPartAmountPerCrate: The number of parts included in one crate.\nIsFragile: A boolean value indicating whether the part is fragile.\nProducts: A list of related products that use this part, with each product including:\nTitle: The name of the related product.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {},
+          "$defs": {},
+          "definitions": {}
+        },
+        "_meta": {}
+      },
+      {
+        "name": "RaiseSAPPurchaseOrder",
+        "description": "Raises a purchase order in the SAP system for a single part.\n\nParameters:\n- ItemName (string, required): the exact part Title as returned by GetPartDetails.\n- Quantity (integer, required): the number of units to order.\n\nBehaviour: creates the PO immediately and returns a confirmation string, e.g.\n\"Purchase order Lig-632 for Lightweight Alloy Wheels from Mavic created for 50 items.\"\nThere is no human confirmation step in this tool — enforce any sign-off before calling it.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "ItemName": {
+              "type": "string"
+            },
+            "Quantity": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "ItemName",
+            "Quantity"
+          ],
+          "$defs": {},
+          "definitions": {}
+        },
+        "_meta": {}
+      }
+    ]
+  }
+}

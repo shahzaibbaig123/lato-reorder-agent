@@ -1,0 +1,13 @@
+# Units of a part needed per bike. The inventory does not say, so the default is 1.
+# Only a reviewed change here alters it (the LLM may suggest, never apply). Keys are exact part titles.
+# 2026-09-25: wheels and pedals set to 2 per bike (one unit = one wheel / one pedal). See docs/CALIBRATION.md.
+units_per_bike:
+  Anti-Slip Pedals: 2
+  High-Traction Pedals: 2
+  Trail-Ready Pedals: 2
+  Ultra-Grip Pedals: 2
+  Durable Alloy Wheels: 2
+  Endurance Alloy Wheels: 2
+  Lightweight Alloy Wheels: 2
+  Racing Alloy Wheels: 2
+  Reinforced Alloy Wheels: 2

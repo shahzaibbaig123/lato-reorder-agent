@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Reorder runs</h1>
+<div class="card">
+  <form method="post" action="/runs">
+    <button class="primary" type="submit">Start a new run</button>
+    <span class="muted small">Reads the inventory, decides every part, submits auto-approved orders,
+      then waits for your review.</span>
+  </form>
+</div>
+<div class="table-wrap">
+<table>
+  <tr><th>Run</th><th>Created (UTC)</th><th>Mode</th><th>Explanations</th><th>Policy</th><th>Status</th></tr>
+  {% for r in runs %}
+  <tr>
+    <td><a href="/runs/{{ r.run_id }}">{{ r.run_id }}</a></td>
+    <td>{{ r.created_at[:16] }}</td><td>{{ r.mode }}</td><td>{{ r.llm }}</td><td>{{ r.policy_version }}</td>
+    <td>{% if r.waiting %}<span class="badge HUMAN">waiting for review</span>
+        {% elif r.done %}<span class="badge AUTO">done</span>{% else %}<span class="badge">-</span>{% endif %}</td>
+  </tr>
+  {% else %}
+  <tr><td colspan="6" class="muted">No runs yet.</td></tr>
+  {% endfor %}
+</table>
+</div>
+{% endblock %}

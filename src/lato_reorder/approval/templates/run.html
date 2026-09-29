@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}Run {{ plan.run_id }}{% endblock %}
+{% block content %}
+<h1>Run {{ plan.run_id }}</h1>
+<p class="muted small">Created {{ plan.created_at.strftime("%Y-%m-%d %H:%M") }} UTC · mode {{ plan.mode }} ·
+  explanations: {{ plan.llm }} · policy {{ plan.policy_version }} (<code>{{ plan.policy_hash }}</code>) ·
+  snapshot <code>{{ plan.snapshot_hash[:12] }}</code></p>
+
+<div class="grid">
+  <div class="card stat"><b>{{ plan.totals.reorder_lines }}</b>orders · {{ plan.totals.reorder_units }} units</div>
+  <div class="card stat"><b>{{ plan.totals.human_lines }}</b>need a human</div>
+  <div class="card stat"><b>{{ plan.totals.auto_lines }}</b>auto-approved · {{ plan.totals.auto_units }} units</div>
+  <div class="card stat"><b>{{ plan.totals.blocked_lines }}</b>blocked</div>
+  <div class="card stat"><b>{{ plan.totals.parts }}</b>parts reviewed</div>
+</div>
+
+{% if plan.summary %}
+<div class="card">
+  <h2>Analyst briefing</h2>
+  <p><strong>{{ plan.summary.headline }}</strong></p>
+  {% if plan.summary.top_risks %}<p class="small">Top risks</p><ul class="small">{% for x in plan.summary.top_risks %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
+  {% if plan.summary.capital_notes %}<p class="small">Where the units go</p><ul class="small">{% for x in plan.summary.capital_notes %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
+  <p class="muted small">Written by the LLM from the plan below; every number in it was checked against the plan. It cannot change any order.</p>
+</div>
+{% endif %}
+
+<h2>Awaiting your approval ({{ pending|length }})</h2>
+{% if pending %}
+  {% for it in pending %}
+    {% set rec = (plan.recommendations | selectattr("decision.facts.part_key", "equalto", it.part_key) | list | first) %}
+    <div class="card">
+      {% include "_intent.html" %}
+      {% if rec %}<p class="small">{{ rec.narrative.justification }}<br>{{ rec.narrative.quantity_explanation }}</p>
+      <p class="small muted">Why a human: {% for r in rec.decision.route_reasons + rec.review_reasons %}{% if r.value != "RTE-AUTO" %}<code title="{{ rules[r] }}">{{ r.value }}</code> {% endif %}{% endfor %}
+        {% for fl in rec.decision.flags %}<span class="badge">{{ fl.value }}</span> {% endfor %}</p>
+      {% with concerns = rec.concerns %}{% include "_concerns.html" %}{% endwith %}{% endif %}
+    </div>
+  {% endfor %}
+  <div class="card">
+    <form class="inline" method="post" action="/runs/{{ plan.run_id }}/approve-all">
+      <span>Batch sign-off: type the number of lines ({{ pending|length }}) to approve all remaining</span>
+      <input type="number" name="confirm_count" min="0" required aria-label="Line count">
+      <button type="submit">Approve all</button>
+    </form>
+  </div>
+{% else %}
+  <p class="muted">Nothing awaiting approval.</p>
+{% endif %}
+
+{% if status.waiting_for_review %}
+<div class="card">
+  <form method="post" action="/runs/{{ plan.run_id }}/submit">
+    <button class="primary" type="submit">Submit approved orders</button>
+    <span class="muted small">Each order is re-checked against fresh inventory, then sent to SAP exactly once.
+      Unapproved lines stay pending.</span>
+  </form>
+</div>
+{% endif %}
+
+{% for key, title in (("auto_submit", "Auto-approved submission"), ("submit", "Submission after review")) %}
+  {% set rep = status.values.get(key) %}
+  {% if rep %}
+  <h2>{{ title }}</h2>
+  <div class="card small">
+    {% if rep.results %}
+      {% for r in rep.results %}<div><span class="badge {{ r.status }}">{{ r.status }}</span> {{ r.item_name }} × {{ r.quantity }}
+        {% if r.po_number %}→ <code>{{ r.po_number }}</code>{% endif %} <span class="muted">{{ r.message }}</span></div>{% endfor %}
+      {% if rep.breaker_tripped %}<div class="error">Circuit breaker tripped: remaining orders were not attempted.</div>{% endif %}
+    {% else %}{{ rep.skipped or rep.refused }}{% endif %}
+  </div>
+  {% endif %}
+{% endfor %}
+
+<h2>Every part, with its reasoning</h2>
+<div class="table-wrap">
+<table>
+  <tr><th>Part</th><th>Tier</th><th>Stock</th><th>Decision</th><th>Qty</th><th>Route</th><th>Why</th></tr>
+  {% for r in recs %}{% set d = r.decision %}
+  <tr>
+    <td>{{ d.facts.item_name }}<div class="muted small">{{ d.facts.supplier }} · used by {{ d.facts.fan_out }}/{{ d.facts.catalogue_size }}</div></td>
+    <td>{{ d.tier.value.split("_", 1)[1] if d.tier else "-" }}</td>
+    <td>{{ d.facts.on_hand }}{% if d.facts.on_order %} + {{ d.facts.on_order }} on order{% endif %}</td>
+    <td>{{ d.decision.value }}</td>
+    <td>{{ d.quantity or "" }}</td>
+    <td><span class="badge {{ r.final_route.value }}">{{ r.final_route.value }}</span>
+      {% set it = run_intents.get(d.facts.part_key) %}{% if it %}<div><span class="badge {{ it.status.value }}">{{ it.status.value }}</span></div>{% endif %}</td>
+    <td>
+      {% if r.concerns %}<span class="badge HUMAN">{{ r.concerns | length }} concern{{ "s" if r.concerns | length > 1 }}</span>{% endif %}
+      <details>
+        <summary>{{ r.narrative.justification }}</summary>
+        <p>{{ r.narrative.quantity_explanation }}</p>
+        <div class="small">Rules: {% for x in d.rules_applied %}<code title="{{ rules[x] }}">{{ x.value }}</code> {% endfor %}</div>
+        {% if d.flags %}<div class="small">Flags: {% for fl in d.flags %}<span class="badge">{{ fl.value }}</span> {% endfor %}</div>{% endif %}
+        {% if d.calc %}<pre>{% for s in d.calc.steps %}{{ s.expression }}
+{% endfor %}</pre>{% endif %}
+        {% with concerns = r.concerns %}{% include "_concerns.html" %}{% endwith %}
+        {% if r.violations %}<div class="error small">LLM review not used ({{ r.violations | join("; ") }}); template explanation shown.</div>{% endif %}
+        {% if d.facts.data_issues %}<div class="error small">{{ d.facts.data_issues | join("; ") }}</div>{% endif %}
+        <div class="muted small">Explanation source: {{ r.narrative.source }} · decision <code>{{ d.decision_hash }}</code></div>
+      </details>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+</div>
+{% endblock %}

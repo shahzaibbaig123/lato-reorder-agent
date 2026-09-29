@@ -1,0 +1,59 @@
+[project]
+name = "lato-reorder"
+version = "0.1.0"
+description = "Intelligent reorder agent for Lato: deterministic reorder policy, LLM-explained recommendations, human-approved SAP purchase orders via MCP"
+authors = [
+    { name = "Mirza Shahzaib Baig", email = "shahzaib.beyg@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "anthropic>=1.8.0",
+    "fastapi>=0.141.1",
+    "httpx>=0.28.1",
+    "jinja2>=3.1.6",
+    "langgraph>=1.2.12",
+    "langgraph-checkpoint-sqlite>=3.1.1",
+    "pydantic>=2.13.5",
+    "pydantic-settings>=2.15.0",
+    "python-multipart>=0.0.32",
+    "pyyaml>=6.0.3",
+    "rich>=15.0.0",
+    "typer>=0.27.2",
+    "uvicorn[standard]>=0.53.0",
+]
+
+[project.scripts]
+lato = "lato_reorder.cli:app"
+
+[build-system]
+requires = ["uv_build>=0.11.32,<0.12.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "hypothesis>=6.168.1",
+    "mypy>=2.3.1",
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+    "ruff>=0.16.8",
+    "types-pyyaml>=6.0.12.20260906",
+]
+
+[tool.ruff]
+line-length = 110
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+plugins = ["pydantic.mypy"]
+files = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+markers = ["live: calls the real Lato MCP sandbox (opt-in: pytest -m live)"]
+addopts = "-m 'not live'"

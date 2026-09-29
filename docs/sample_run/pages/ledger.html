@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PO ledger</title>
+  <script src="/static/htmx.min.js"></script><!-- htmx 2.0.4, vendored (sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+) -->
+  <style>
+    :root { --fg:#1d2433; --muted:#667085; --line:#e4e7ec; --bg:#f7f8fa; --card:#fff;
+            --red:#b42318; --amber:#b54708; --green:#067647; --blue:#175cd3; }
+    * { box-sizing: border-box; }
+    body { margin:0; font:14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; color:var(--fg); background:var(--bg); }
+    header { background:#101828; color:#fff; padding:10px 24px; display:flex; gap:24px; align-items:center; flex-wrap:wrap; }
+    header a { color:#fff; text-decoration:none; opacity:.85; } header a:hover { opacity:1; }
+    header .mode { margin-left:auto; font-size:12px; padding:2px 8px; border-radius:10px; background:#344054; }
+    header .mode.SANDBOX { background:var(--blue); } header .mode.PRODUCTION { background:var(--red); }
+    main { max-width:1200px; margin:0 auto; padding:20px 24px 60px; }
+    h1 { font-size:20px; margin:4px 0 12px; } h2 { font-size:16px; margin:28px 0 10px; }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:14px 16px; margin-bottom:12px; }
+    .muted { color:var(--muted); } .small { font-size:12px; }
+    table { width:100%; border-collapse:collapse; background:var(--card); }
+    th, td { text-align:left; padding:7px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+    th { font-size:12px; color:var(--muted); font-weight:600; }
+    .table-wrap { overflow-x:auto; border:1px solid var(--line); border-radius:8px; }
+    .badge { display:inline-block; font-size:11px; font-weight:600; padding:1px 7px; border-radius:9px; background:#eef0f3; }
+    .BLOCK, .SUBMITTED_MISMATCH, .UNKNOWN, .FAILED { background:#fee4e2; color:var(--red); }
+    .HUMAN, .PENDING_APPROVAL, .STALE { background:#fef0c7; color:var(--amber); }
+    .AUTO, .APPROVED, .SUBMITTED, .RECEIVED { background:#dcfae6; color:var(--green); }
+    .NONE, .REJECTED, .SUPERSEDED, .EXPIRED, .CANCELLED { background:#eef0f3; color:var(--muted); }
+    form.inline { display:inline-flex; gap:6px; align-items:center; flex-wrap:wrap; margin:4px 12px 4px 0; }
+    input[type=number] { width:80px; } input[type=text] { width:220px; }
+    input, button { font:inherit; padding:4px 8px; border:1px solid #d0d5dd; border-radius:6px; }
+    button { background:#fff; cursor:pointer; } button.primary { background:#101828; color:#fff; border-color:#101828; }
+    button.danger { color:var(--red); }
+    .error { color:var(--red); font-weight:600; margin-top:6px; }
+    details summary { cursor:pointer; } code, pre { font:12px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    pre { white-space:pre-wrap; background:#fff; border:1px solid var(--line); border-radius:8px; padding:12px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:10px; }
+    .stat b { display:block; font-size:22px; }
+  </style>
+</head>
+<body>
+  <header>
+    <strong>Lato reorder agent</strong>
+    <a href="/">Runs</a><a href="/ledger">PO ledger</a><a href="/calibration">Calibration</a>
+    <span class="mode SANDBOX">SANDBOX · signed in as approver</span>
+  </header>
+  <main>
+<h1>PO ledger</h1>
+<p class="muted small">Every purchase-order intent and its state. At most one open intent per part is enforced by the database.</p>
+<div class="table-wrap">
+<table>
+  <tr><th>Part</th><th>Qty</th><th>Status</th><th>SAP PO</th><th>Run</th><th>Updated (UTC)</th><th>Action</th></tr>
+  
+  <tr>
+    <td>Precision Gear Set<div class="muted small">HUMAN · Shimano</div></td>
+    <td>109</td>
+    <td><span class="badge SUBMITTED">SUBMITTED</span></td>
+    <td><code>Pre-397</code>
+      </td>
+    <td><a href="/runs/650471040eb4">650471040eb4</a></td>
+    <td>2026-09-25T16:08</td>
+    <td>
+      
+      <form class="inline" method="post" action="/intents/589bedb6e7b1/received"><button type="submit">Mark received</button></form>
+      
+      <details><summary class="small">history</summary>
+        <div hx-get="/intents/589bedb6e7b1/events" hx-trigger="toggle from:closest details once" class="small muted">loading…</div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Lightweight Steel Frame<div class="muted small">AUTO · Giant</div></td>
+    <td>16</td>
+    <td><span class="badge SUBMITTED">SUBMITTED</span></td>
+    <td><code>Lig-199</code>
+      </td>
+    <td><a href="/runs/27e38bb5c846">27e38bb5c846</a></td>
+    <td>2026-09-25T16:07</td>
+    <td>
+      
+      <form class="inline" method="post" action="/intents/639acb051365/received"><button type="submit">Mark received</button></form>
+      
+      <details><summary class="small">history</summary>
+        <div hx-get="/intents/639acb051365/events" hx-trigger="toggle from:closest details once" class="small muted">loading…</div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Lightweight Alloy Wheels<div class="muted small">AUTO · Mavic</div></td>
+    <td>35</td>
+    <td><span class="badge SUBMITTED">SUBMITTED</span></td>
+    <td><code>Lig-396</code>
+      </td>
+    <td><a href="/runs/27e38bb5c846">27e38bb5c846</a></td>
+    <td>2026-09-25T16:07</td>
+    <td>
+      
+      <form class="inline" method="post" action="/intents/29e3973d77c0/received"><button type="submit">Mark received</button></form>
+      
+      <details><summary class="small">history</summary>
+        <div hx-get="/intents/29e3973d77c0/events" hx-trigger="toggle from:closest details once" class="small muted">loading…</div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Anti-Slip Pedals<div class="muted small">AUTO · Look</div></td>
+    <td>66</td>
+    <td><span class="badge SUBMITTED">SUBMITTED</span></td>
+    <td><code>Ant-812</code>
+      </td>
+    <td><a href="/runs/27e38bb5c846">27e38bb5c846</a></td>
+    <td>2026-09-25T16:07</td>
+    <td>
+      
+      <form class="inline" method="post" action="/intents/abbf00641e8f/received"><button type="submit">Mark received</button></form>
+      
+      <details><summary class="small">history</summary>
+        <div hx-get="/intents/abbf00641e8f/events" hx-trigger="toggle from:closest details once" class="small muted">loading…</div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Precision Gear Set<div class="muted small">HUMAN · Shimano</div></td>
+    <td>109</td>
+    <td><span class="badge FAILED">FAILED</span></td>
+    <td>
+      </td>
+    <td><a href="/runs/27e38bb5c846">27e38bb5c846</a></td>
+    <td>2026-09-25T16:07</td>
+    <td>
+      
+      <details><summary class="small">history</summary>
+        <div hx-get="/intents/c3bffad8d76a/events" hx-trigger="toggle from:closest details once" class="small muted">loading…</div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Rear Derailleur Mechanism<div class="muted small">HUMAN · SRAM</div></td>
+    <td>120 <span class="muted small">(rec. 116)</span></td>
+    <td><span class="badge SUBMITTED">SUBMITTED</span></td>
+    <td><code>Rea-835</code>
+      </td>
+    <td><a href="/runs/27e38bb5c846">27e38bb5c846</a></td>
+    <td>2026-09-25T16:07</td>
+    <td>
+      
+      <form class="inline" method="post" action="/intents/25718bf20bf4/received"><button type="submit">Mark received</button></form>
+      
+      <details><summary class="small">history</summary>
+        <div hx-get="/intents/25718bf20bf4/events" hx-trigger="toggle from:closest details once" class="small muted">loading…</div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Hydraulic Suspension Fork<div class="muted small">HUMAN · Fox</div></td>
+    <td>119</td>
+    <td><span class="badge SUBMITTED">SUBMITTED</span></td>
+    <td><code>Hyd-329</code>
+      </td>
+    <td><a href="/runs/27e38bb5c846">27e38bb5c846</a></td>
+    <td>2026-09-25T16:07</td>
+    <td>
+      
+      <form class="inline" method="post" action="/intents/afd4bc272fe0/received"><button type="submit">Mark received</button></form>
+      
+      <details><summary class="small">history</summary>
+        <div hx-get="/intents/afd4bc272fe0/events" hx-trigger="toggle from:closest details once" class="small muted">loading…</div>
+      </details>
+    </td>
+  </tr>
+  
+</table>
+</div>
+</main>
+</body>
+</html>

@@ -1,0 +1,2207 @@
+{
+  "run_id": "650471040eb4",
+  "created_at": "2026-09-25T16:07:56.850417Z",
+  "mode": "SANDBOX",
+  "llm": "claude-haiku-4-5 (prompt 34cc556cbbf23ba2)",
+  "policy_version": "1.0.0",
+  "policy_hash": "3315430fb6b5ff46",
+  "snapshot_hash": "efb956ef6b9451321aa92dcc1cee11919bb67fbe0e987c844fb249b6cac45338",
+  "recommendations": [
+    {
+      "decision": {
+        "facts": {
+          "part_key": "precision gear set",
+          "item_name": "Precision Gear Set",
+          "supplier": "Shimano",
+          "description": "High-quality gears for seamless transitions across speeds.",
+          "on_hand": 26,
+          "on_order": 0,
+          "inventory_position": 26,
+          "used_by": [
+            "Carrera Subway",
+            "Carrera SubwayE",
+            "Carrera Crossfuse",
+            "CityWide Lite",
+            "CityWide Chill",
+            "LongHaul",
+            "EveryDay Cruiser",
+            "EveryDay Vibin'",
+            "EveryDay"
+          ],
+          "fan_out": 9,
+          "catalogue_size": 9,
+          "share": 1.0,
+          "units_per_bike": 1,
+          "units_source": "DEFAULT",
+          "fg_by_model": {
+            "Carrera Subway": 96,
+            "Carrera SubwayE": 9,
+            "Carrera Crossfuse": 80,
+            "CityWide Lite": 95,
+            "CityWide Chill": 21,
+            "LongHaul": 52,
+            "EveryDay Cruiser": 94,
+            "EveryDay Vibin'": 79,
+            "EveryDay": 96
+          },
+          "exposed_models": [
+            "Carrera SubwayE",
+            "CityWide Chill"
+          ],
+          "data_issues": []
+        },
+        "calc": {
+          "k": 5.0,
+          "cycle_demand": 45.0,
+          "safety_cycles": 1.0,
+          "reorder_point": 90,
+          "order_up_to": 135,
+          "cover_before": 0.58,
+          "cover_after": 3.0,
+          "raw_quantity": 109,
+          "lot": 1,
+          "steps": [
+            {
+              "rule_id": "TIER-1",
+              "expression": "used by 9 of 9 bike models (share 1.00)",
+              "value": 1.0
+            },
+            {
+              "rule_id": null,
+              "expression": "D = K x q x f = 5 x 1 x 9 = 45 units/cycle",
+              "value": 45.0
+            },
+            {
+              "rule_id": null,
+              "expression": "ROP = ceil((LT + ss) x D) = ceil((1 + 1) x 45) = 90",
+              "value": 90.0
+            },
+            {
+              "rule_id": null,
+              "expression": "OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 1) x 45) = 135",
+              "value": 135.0
+            },
+            {
+              "rule_id": null,
+              "expression": "IP = on hand + on order = 26 + 0 = 26",
+              "value": 26.0
+            },
+            {
+              "rule_id": "QTY-OUT",
+              "expression": "Q = OUT - IP = 135 - 26 = 109",
+              "value": 109.0
+            }
+          ]
+        },
+        "tier": "T1_CRITICAL",
+        "decision": "REORDER",
+        "quantity": 109,
+        "primary_rule": "TRIG-ROP",
+        "rules_applied": [
+          "TIER-1",
+          "TRIG-ROP",
+          "QTY-OUT",
+          "RTE-H-TIER",
+          "RTE-H-SIZE"
+        ],
+        "flags": [],
+        "priority": 0.7111,
+        "route": "HUMAN",
+        "route_reasons": [
+          "RTE-H-TIER",
+          "RTE-H-SIZE"
+        ],
+        "policy_version": "1.0.0",
+        "decision_hash": "714c14eab18a83c8"
+      },
+      "narrative": {
+        "justification": "Reorder: this gear set is used by all 9 bike models in the catalogue and inventory position 26 is well below the reorder point of 90, creating immediate stockout risk across the entire product line.",
+        "quantity_explanation": "109 units = order-up-to level 135 minus inventory position 26. The order requires human approval because the part is CRITICAL and the quantity exceeds the auto-approve limit.",
+        "source": "LLM"
+      },
+      "final_route": "HUMAN",
+      "review_reasons": [],
+      "concerns": [],
+      "violations": []
+    },
+    {
+      "decision": {
+        "facts": {
+          "part_key": "advanced front derailleur",
+          "item_name": "Advanced Front Derailleur",
+          "supplier": "Shimano",
+          "description": "Precision-engineered front derailleur for improved shifting performance.",
+          "on_hand": 97,
+          "on_order": 0,
+          "inventory_position": 97,
+          "used_by": [
+            "CityWide Lite",
+            "EveryDay Cruiser"
+          ],
+          "fan_out": 2,
+          "catalogue_size": 9,
+          "share": 0.2222,
+          "units_per_bike": 1,
+          "units_source": "DEFAULT",
+          "fg_by_model": {
+            "CityWide Lite": 95,
+            "EveryDay Cruiser": 94
+          },
+          "exposed_models": [],
+          "data_issues": []
+        },
+        "calc": {
+          "k": 5.0,
+          "cycle_demand": 10.0,
+          "safety_cycles": 0.5,
+          "reorder_point": 15,
+          "order_up_to": 25,
+          "cover_before": 9.7,
+          "cover_after": null,
+          "raw_quantity": 0,
+          "lot": 1,
+          "steps": [
+            {
+              "rule_id": "TIER-2",
+              "expression": "used by 2 of 9 bike models (share 0.22)",
+              "value": 0.2222
+            },
+            {
+              "rule_id": null,
+              "expression": "D = K x q x f = 5 x 1 x 2 = 10 units/cycle",
+              "value": 10.0
+            },
+            {
+              "rule_id": null,
+              "expression": "ROP = ceil((LT + ss) x D) = ceil((1 + 0.5) x 10) = 15",
+              "value": 15.0
+            },
+            {
+              "rule_id": null,
+              "expression": "OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0.5) x 10) = 25",
+              "value": 25.0
+            },
+            {
+              "rule_id": null,
+              "expression": "IP = on hand + on order = 97 + 0 = 97",
+              "value": 97.0
+            }
+          ]
+        },
+        "tier": "T2_SHARED",
+        "decision": "NO_ORDER",
+        "quantity": 0,
+        "primary_rule": "HOLD-ABOVE-ROP",
+        "rules_applied": [
+          "TIER-2",
+          "HOLD-ABOVE-ROP"
+        ],
+        "flags": [
+          "EXCESS"
+        ],
+        "priority": 0.0,
+        "route": "NONE",
+        "route_reasons": [],
+        "policy_version": "1.0.0",
+        "decision_hash": "f24b9b4c8c272cd4"
+      },
+      "narrative": {
+        "justification": "No order: this part is used by 2 of 9 bike models and inventory position 97 is well above the reorder point of 15, so stock is adequate. The part is flagged as excess.",
+        "quantity_explanation": "An order would trigger only if inventory position falls to 15 or below. Current stock of 97 provides 9.7 cycles of cover at the assumed consumption rate.",
+        "source": "LLM"
+      },
+      "final_route": "NONE",
+      "review_reasons": [],
+      "concerns": [],
+      "violations": []
+    },
+    {
+      "decision": {
+        "facts": {
+          "part_key": "all terrain carbon frame",
+          "item_name": "All-Terrain Carbon Frame",
+          "supplier": "Giant",
+          "description": "Lightweight carbon frame designed for versatile terrains.",
+          "on_hand": 28,
+          "on_order": 0,
+          "inventory_position": 28,
+          "used_by": [
+            "EveryDay"
+          ],
+          "fan_out": 1,
+          "catalogue_size": 9,
+          "share": 0.1111,
+          "units_per_bike": 1,
+          "units_source": "DEFAULT",
+          "fg_by_model": {
+            "EveryDay": 96
+          },
+          "exposed_models": [],
+          "data_issues": []
+        },
+        "calc": {
+          "k": 5.0,
+          "cycle_demand": 5.0,
+          "safety_cycles": 0.0,
+          "reorder_point": 5,
+          "order_up_to": 10,
+          "cover_before": 5.6,
+          "cover_after": null,
+          "raw_quantity": 0,
+          "lot": 1,
+          "steps": [
+            {
+              "rule_id": "TIER-3",
+              "expression": "used by 1 of 9 bike models (share 0.11)",
+              "value": 0.1111
+            },
+            {
+              "rule_id": null,
+              "expression": "D = K x q x f = 5 x 1 x 1 = 5 units/cycle",
+              "value": 5.0
+            },
+            {
+              "rule_id": null,
+              "expression": "ROP = ceil((LT + ss) x D) = ceil((1 + 0) x 5) = 5",
+              "value": 5.0
+            },
+            {
+              "rule_id": null,
+              "expression": "OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0) x 5) = 10",
+              "value": 10.0
+            },
+            {
+              "rule_id": null,
+              "expression": "IP = on hand + on order = 28 + 0 = 28",
+              "value": 28.0
+            }
+          ]
+        },
+        "tier": "T3_SINGLE",
+        "decision": "NO_ORDER",
+        "quantity": 0,
+        "primary_rule": "HOLD-ABOVE-ROP",
+        "rules_applied": [
+          "TIER-3",
+          "HOLD-ABOVE-ROP"
+        ],
+        "flags": [
+          "EXCESS"
+        ],
+        "priority": 0.0,
+        "route": "NONE",
+        "route_reasons": [],
+        "policy_version": "1.0.0",
+        "decision_hash": "a6e7256db0214996"
+      },
+      "narrative": {
+        "justification": "No order: only the EveryDay model uses this frame and inventory position 28 is well above the reorder point of 5, so stock is adequate. The EXCESS flag confirms ample supply.",
+        "quantity_explanation": "An order would trigger only if inventory position falls to 5 or below. Current stock of 28 covers 5.6 cycles of demand.",
+        "source": "LLM"
+      },
+      "final_route": "NONE",
+      "review_reasons": [],
+      "concerns": [],
+      "violations": []
+    },
+    {
+      "decision": {
+        "facts": {
+          "part_key": "anti slip pedals",
+          "item_name": "Anti-Slip Pedals",
+          "supplier": "Look",
+          "description": "Pedals designed with an anti-slip surface for secure riding.",
+          "on_hand": 34,
+          "on_order": 66,
+          "inventory_position": 100,
+          "used_by": [
+            "Carrera Subway",
+            "Carrera SubwayE",
+            "Carrera Crossfuse",
+            "EveryDay Vibin'"
+          ],
+          "fan_out": 4,
+          "catalogue_size": 9,
+          "share": 0.4444,
+          "units_per_bike": 2,
+          "units_source": "OVERRIDE",
+          "fg_by_model": {
+            "Carrera Subway": 96,
+            "Carrera SubwayE": 9,
+            "Carrera Crossfuse": 80,
+            "EveryDay Vibin'": 79
+          },
+          "exposed_models": [
+            "Carrera SubwayE"
+          ],
+          "data_issues": []
+        },
+        "calc": {
+          "k": 5.0,
+          "cycle_demand": 40.0,
+          "safety_cycles": 0.5,
+          "reorder_point": 60,
+          "order_up_to": 100,
+          "cover_before": 2.5,
+          "cover_after": null,
+          "raw_quantity": 0,
+          "lot": 1,
+          "steps": [
+            {
+              "rule_id": "TIER-2",
+              "expression": "used by 4 of 9 bike models (share 0.44)",
+              "value": 0.4444
+            },
+            {
+              "rule_id": null,
+              "expression": "D = K x q x f = 5 x 2 x 4 = 40 units/cycle",
+              "value": 40.0
+            },
+            {
+              "rule_id": null,
+              "expression": "ROP = ceil((LT + ss) x D) = ceil((1 + 0.5) x 40) = 60",
+              "value": 60.0
+            },
+            {
+              "rule_id": null,
+              "expression": "OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0.5) x 40) = 100",
+              "value": 100.0
+            },
+            {
+              "rule_id": null,
+              "expression": "IP = on hand + on order = 34 + 66 = 100",
+              "value": 100.0
+            }
+          ]
+        },
+        "tier": "T2_SHARED",
+        "decision": "NO_ORDER",
+        "quantity": 0,
+        "primary_rule": "HOLD-OPEN-PO",
+        "rules_applied": [
+          "TIER-2",
+          "HOLD-OPEN-PO"
+        ],
+        "flags": [],
+        "priority": 0.0,
+        "route": "NONE",
+        "route_reasons": [],
+        "policy_version": "1.0.0",
+        "decision_hash": "1717694f9fbb7acc"
+      },
+      "narrative": {
+        "justification": "No order: four bike models depend on this part and an open purchase order of 66 units will bring inventory position to 100, which meets the order-up-to level. Reordering now would exceed stock targets.",
+        "quantity_explanation": "Inventory position of 100 equals the order-up-to level of 100. An open PO already covers the gap between current stock and the reorder point of 60, so no additional order is needed.",
+        "source": "LLM"
+      },
+      "final_route": "NONE",
+      "review_reasons": [],
+      "concerns": [],
+      "violations": []
+    },
+    {
+      "decision": {
+        "facts": {
+          "part_key": "carbon fiber frame",
+          "item_name": "Carbon Fiber Frame",
+          "supplier": "Trek",
+          "description": "Ultra-light frame for maximum agility.",
+          "on_hand": 35,
+          "on_order": 0,
+          "inventory_position": 35,
+          "used_by": [
+            "Carrera Subway"
+          ],
+          "fan_out": 1,
+          "catalogue_size": 9,
+          "share": 0.1111,
+          "units_per_bike": 1,
+          "units_source": "DEFAULT",
+          "fg_by_model": {
+            "Carrera Subway": 96
+          },
+          "exposed_models": [],
+          "data_issues": []
+        },
+        "calc": {
+          "k": 5.0,
+          "cycle_demand": 5.0,
+          "safety_cycles": 0.0,
+          "reorder_point": 5,
+          "order_up_to": 10,
+          "cover_before": 7.0,
+          "cover_after": null,
+          "raw_quantity": 0,
+          "lot": 1,
+          "steps": [
+            {
+              "rule_id": "TIER-3",
+              "expression": "used by 1 of 9 bike models (share 0.11)",
+              "value": 0.1111
+            },
+            {
+              "rule_id": null,
+              "expression": "D = K x q x f = 5 x 1 x 1 = 5 units/cycle",
+              "value": 5.0
+            },
+            {
+              "rule_id": null,
+              "expression": "ROP = ceil((LT + ss) x D) = ceil((1 + 0) x 5) = 5",
+              "value": 5.0
+            },
+            {
+              "rule_id": null,
+              "expression": "OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0) x 5) = 10",
+              "value": 10.0
+            },
+            {
+              "rule_id": null,
+              "expression": "IP = on hand + on order = 35 + 0 = 35",
+              "value": 35.0
+            }
+          ]
+        },
+        "tier": "T3_SINGLE",
+        "decision": "NO_ORDER",
+        "quantity": 0,
+        "primary_rule": "HOLD-ABOVE-ROP",
+        "rules_applied": [
+          "TIER-3",
+          "HOLD-ABOVE-ROP"
+        ],
+        "flags": [
+          "EXCESS"
+        ],
+        "priority": 0.0,
+        "route": "NONE",
+        "route_reasons": [],
+        "policy_version": "1.0.0",
+        "decision_hash": "eba63a98d136b869"
+      },
+      "narrative": {
+        "justification": "No order: only the Carrera Subway model uses this frame and inventory position 35 is well above the reorder point of 5, so stock is adequate.",
+        "quantity_explanation": "An order triggers when inventory position falls to 5 or below. Current stock of 35 covers 7 cycles of demand.",
+        "source": "LLM"
+      },
+      "final_route": "NONE",
+      "review_reasons": [],
+      "concerns": [],
+      "violations": []
+    },
+    {
+      "decision": {
+        "facts": {
+          "part_key": "durable alloy wheels",
+          "item_name": "Durable Alloy Wheels",
+          "supplier": "Mavic",
+          "description": "High-strength alloy wheels for a smooth and sturdy ride.",
+          "on_hand": 13,
+          "on_order": 0,
+          "inventory_position": 13,
+          "used_by": [
+            "Carrera Subway"
+          ],
+          "fan_out": 1,
+          "catalogue_size": 9,
+          "share": 0.1111,
+          "units_per_bike": 2,
+          "units_source": "OVERRIDE",
+          "fg_by_model": {
+            "Carrera Subway": 96
+          },
+          "exposed_models": [],
+          "data_issues": []
+        },
+        "calc": {
+          "k": 5.0,
+          "cycle_demand": 10.0,
+          "safety_cycles": 0.0,
+          "reorder_point": 10,
+          "order_up_to": 20,
+          "cover_before": 1.3,
+          "cover_after": null,
+          "raw_quantity": 0,
+          "lot": 1,
+          "steps": [
+            {
+              "rule_id": "TIER-3",
+              "expression": "used by 1 of 9 bike models (share 0.11)",
+              "value": 0.1111
+            },
+            {
+              "rule_id": null,
+              "expression": "D = K x q x f = 5 x 2 x 1 = 10 units/cycle",
+              "value": 10.0
+            },
+            {
+              "rule_id": null,
+              "expression": "ROP = ceil((LT + ss) x D) = ceil((1 + 0) x 10) = 10",
+              "value": 10.0
+            },
+            {
+              "rule_id": null,
+              "expression": "OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0) x 10) = 20",
+              "value": 20.0
+            },
+            {
+              "rule_id": null,
+              "expression": "IP = on hand + on order = 13 + 0 = 13",
+              "value": 13.0
+            }
+          ]
+        },
+        "tier": "T3_SINGLE",
+        "decision": "NO_ORDER",
+        "quantity": 0,
+        "primary_rule": "HOLD-ABOVE-ROP",
+        "rules_applied": [
+          "TIER-3",
+          "HOLD-ABOVE-ROP"
+        ],
+        "flags": [],
+        "priority": 0.0,
+        "route": "NONE",
+        "route_reasons": [],
+        "policy_version": "1.0.0",
+        "decision_hash": "b01b77a0021a2c25"
+      },
+      "narrative": {
+        "justification": "No order: only the Carrera Subway model uses this part, and inventory position 13 is above the reorder point of 10, so stock is adequate for the current cycle.",
+        "quantity_explanation": "An order would trigger when inventory position falls to 10 or below. Current stock of 13 covers 1.3 cycles of demand at 10 units per cycle.",
+        "source": "LLM"
+      },
+      "final_route": "NONE",
+      "review_reasons": [],
+      "concerns": [],
+      "violations": []
+    },
+    {
+      "decision": {
+        "facts": {
+          "part_key": "endurance alloy wheels",
+          "item_name": "Endurance Alloy Wheels",
+          "supplier": "Mavic",
+          "description": "Lightweight alloy wheels optimized for endurance cycling.",
+          "on_hand": 78,
+          "on_order": 0,
+          "inventory_position": 78,
+          "used_by": [
+            "EveryDay"
+          ],
+          "fan_out": 1,
+          "catalogue_size": 9,
+          "share": 0.1111,
+          "units_per_bike": 2,
+          "units_source": "OVERRIDE",
+          "fg_by_model": {
+            "EveryDay": 96
+          },
+          "exposed_models": [],
+          "data_issues": []
+        },
+        "calc": {
+          "k": 5.0,
+          "cycle_demand": 10.0,
+          "safety_cycles": 0.0,
+          "reorder_point": 10,
+          "order_up_to": 20,
+          "cover_before": 7.8,
+          "cover_after": null,
+          "raw_quantity": 0,
+          "lot": 1,
+          "steps": [
+            {
+              "rule_id": "TIER-3",
+              "expression": "used by 1 of 9 bike models (share 0.11)",
+              "value": 0.1111
+            },
+            {
+              "rule_id": null,
+              "expression": "D = K x q x f = 5 x 2 x 1 = 10 units/cycle",
+              "value": 10.0
+            },
+            {
+              "rule_id": null,
+              "expression": "ROP = ceil((LT + ss) x D) = ceil((1 + 0) x 10) = 10",
+              "value": 10.0
+            },
+            {
+              "rule_id": null,
+              "expression": "OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0) x 10) = 20",
+              "value": 20.0
+            },
+            {
+              "rule_id": null,
+              "expression": "IP = on hand + on order = 78 + 0 = 78",
+              "value": 78.0
+            }
+          ]
+        },
+        "tier": "T3_SINGLE",
+        "decision": "NO_ORDER",
+        "quantity": 0,
+        "primary_rule": "HOLD-ABOVE-ROP",
+        "rules_applied": [
+          "TIER-3",
+          "HOLD-ABOVE-ROP"
+        ],
+        "flags": [
+          "EXCESS"
+        ],
+        "priority": 0.0,
+        "route": "NONE",
+        "route_reasons": [],
+        "policy_version": "1.0.0",
+        "decision_hash": "fdd45a835e5aa2d4"
+      },
+      "narrative": {
+        "justification": "No order: this part is used by only one bike model and inventory position 78 is well above the reorder point of 10, so stock is adequate and no reorder is needed.",
+        "quantity_explanation": "An order would trigger only if inventory position falls to 10 or below. Current stock of 78 covers 7.8 cycles of demand.",
+        "source": "LLM"
+      },
+      "final_route": "NONE",
+      "review_reasons": [],
+      "concerns": [],
+      "violations": []
+    },
+    {
+      "decision": {
+        "facts": {
+          "part_key": "endurance carbon frame",
+          "item_name": "Endurance Carbon Frame",
+          "supplier": "Specialized",
+          "description": "Designed for long rides with lightweight and durability.",
+          "on_hand": 30,
+          "on_order": 0,
+          "inventory_position": 30,
+          "used_by": [
+            "CityWide Chill",
+            "LongHaul"
+          ],
+          "fan_out": 2,
+          "catalogue_size": 9,
+          "share": 0.2222,
+          "units_per_bike": 1,
+          "units_source": "DEFAULT",
+          "fg_by_model": {
+            "CityWide Chill": 21,
+            "LongHaul": 52
+          },
+          "exposed_models": [
+            "CityWide Chill"
+          ],
+          "data_issues": []
+        },
+        "calc": {
+          "k": 5.0,
+          "cycle_demand": 10.0,
+          "safety_cycles": 0.5,
+          "reorder_point": 15,
+          "order_up_to": 25,
+          "cover_before": 3.0,
+          "cover_after": null,
+          "raw_quantity": 0,
+          "lot": 1,
+          "steps": [
+            {
+              "rule_id": "TIER-2",
+              "expression": "used by 2 of 9 bike models (share 0.22)",
+              "value": 0.2222
+            },
+            {
+              "rule_id": null,
+              "expression": "D = K x q x f = 5 x 1 x 2 = 10 units/cycle",
+              "value": 10.0
+            },
+            {
+              "rule_id": null,
+              "expression": "ROP = ceil((LT + ss) x D) = ceil((1 + 0.5) x 10) = 15",
+              "value": 15.0
+            },
+            {
+              "rule_id": null,
+              "expression": "OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0.5) x 10) = 25",
+              "value": 25.0
+            },
+            {
+              "rule_id": null,
+              "expression": "IP = on hand + on order = 30 + 0 = 30",
+              "value": 30.0
+            }
+          ]
+        },
+        "tier": "T2_SHARED",
+        "decision": "NO_ORDER",
+        "quantity": 0,
+        "primary_rule": "HOLD-ABOVE-ROP",
+        "rules_applied": [
+          "TIER-2",
+          "HOLD-ABOVE-ROP"
+        ],
+        "flags": [
+          "FG_EXPOSED"
+        ],
+        "priority": 0.0,
+        "route": "NONE",
+        "route_reasons": [],
+        "policy_version": "1.0.0",
+        "decision_hash": "0e9ca21003b80760"
+      },
+      "narrative": {
+        "justification": "No order: this frame is used by 2 of 9 bike models and inventory position 30 is above the reorder point of 15, so stock is adequate. However, one dependent model (CityWide Chill) has low finished-bike stock.",
+        "quantity_explanation": "An order triggers when inventory position falls to 15 or below. Current position of 30 provides 3 cycles of cover at the assumed demand rate.",
+        "source": "LLM"
+      },
+      "final_route": "NONE",
+      "review_reasons": [],
+      "concerns": [],
+      "violations": []
+    },
+    {
+      "decision": {
+        "facts": {
+          "part_key": "front derailleur mechanism",
+          "item_name": "Front Derailleur Mechanism",
+          "supplier": "Campagnolo",
+          "description": "Supports smooth gear changes on the front chainring.",
+          "on_hand": 34,
+          "on_order": 0,
+          "inventory_position": 34,
+          "used_by": [
+            "Carrera Subway"
+          ],
+          "fan_out": 1,
+          "catalogue_size": 9,
+          "share": 0.1111,
+          "units_per_bike": 1,
+          "units_source": "DEFAULT",
+          "fg_by_model": {
+            "Carrera Subway": 96
+          },
+          "exposed_models": [],
+          "data_issues": []
+        },
+        "calc": {
+          "k": 5.0,
+          "cycle_demand": 5.0,
+          "safety_cycles": 0.0,
+          "reorder_point": 5,
+          "order_up_to": 10,
+          "cover_before": 6.8,
+          "cover_after": null,
+          "raw_quantity": 0,
+          "lot": 1,
+          "steps": [
+            {
+              "rule_id": "TIER-3",
+              "expression": "used by 1 of 9 bike models (share 0.11)",
+              "value": 0.1111
+            },
+            {
+              "rule_id": null,
+              "expression": "D = K x q x f = 5 x 1 x 1 = 5 units/cycle",
+              "value": 5.0
+            },
+            {
+              "rule_id": null,
+              "expression": "ROP = ceil((LT + ss) x D) = ceil((1 + 0) x 5) = 5",
+              "value": 5.0
+            },
+            {
+              "rule_id": null,
+              "expression": "OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0) x 5) = 10",
+              "value": 10.0
+            },
+            {
+              "rule_id": null,
+              "expression": "IP = on hand + on order = 34 + 0 = 34",
+              "value": 34.0
+            }
+          ]
+        },
+        "tier": "T3_SINGLE",
+        "decision": "NO_ORDER",
+        "quantity": 0,
+        "primary_rule": "HOLD-ABOVE-ROP",
+        "rules_applied": [
+          "TIER-3",
+          "HOLD-ABOVE-ROP"
+        ],
+        "flags": [
+          "EXCESS"
+        ],
+        "priority": 0.0,
+        "route": "NONE",
+        "route_reasons": [],
+        "policy_version": "1.0.0",
+        "decision_hash": "8b87ff5d69d95fce"
+      },
+      "narrative": {
+        "justification": "No order: only the Carrera Subway model uses this front derailleur and inventory position 34 is well above the reorder point of 5, so stock is adequate.",
+        "quantity_explanation": "An order would trigger only when inventory position falls to 5 or below. Current stock of 34 units provides 6.8 cycles of cover.",
+        "source": "LLM"
+      },
+      "final_route": "NONE",
+      "review_reasons": [],
+      "concerns": [],
+      "violations": []
+    },
+    {
+      "decision": {
+        "facts": {
+          "part_key": "gel comfort seat",
+          "item_name": "Gel Comfort Seat",
+          "supplier": "Selle Italia",
+          "description": "Ergonomically designed seat with gel padding for maximum comfort.",
+          "on_hand": 99,
+          "on_order": 0,
+          "inventory_position": 99,
+          "used_by": [
+            "Carrera Subway",
+            "Carrera SubwayE",
+            "Carrera Crossfuse",
+            "CityWide Lite",
+            "CityWide Chill",
+            "LongHaul",
+            "EveryDay Cruiser",
+            "EveryDay Vibin'",
+            "EveryDay"
+          ],
+          "fan_out": 9,
+          "catalogue_size": 9,
+          "share": 1.0,
+          "units_per_bike": 1,
+          "units_source": "DEFAULT",
+          "fg_by_model": {
+            "Carrera Subway": 96,
+            "Carrera SubwayE": 9,
+            "Carrera Crossfuse": 80,
+            "CityWide Lite": 95,
+            "CityWide Chill": 21,
+            "LongHaul": 52,
+            "EveryDay Cruiser": 94,
+            "EveryDay Vibin'": 79,
+            "EveryDay": 96
+          },
+          "exposed_models": [
+            "Carrera SubwayE",
+            "CityWide Chill"
+          ],
+          "data_issues": []
+        },
+        "calc": {
+          "k": 5.0,
+          "cycle_demand": 45.0,
+          "safety_cycles": 1.0,
+          "reorder_point": 90,
+          "order_up_to": 135,
+          "cover_before": 2.2,
+          "cover_after": null,
+          "raw_quantity": 0,
+          "lot": 1,
+          "steps": [
+            {
+              "rule_id": "TIER-1",
+              "expression": "used by 9 of 9 bike models (share 1.00)",
+              "value": 1.0
+            },
+            {
+              "rule_id": null,
+              "expression": "D = K x q x f = 5 x 1 x 9 = 45 units/cycle",
+              "value": 45.0
+            },
+            {
+              "rule_id": null,
+              "expression": "ROP = ceil((LT + ss) x D) = ceil((1 + 1) x 45) = 90",
+              "value": 90.0
+            },
+            {
+              "rule_id": null,
+              "expression": "OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 1) x 45) = 135",
+              "value": 135.0
+            },
+            {
+              "rule_id": null,
+              "expression": "IP = on hand + on order = 99 + 0 = 99",
+              "value": 99.0
+            }
+          ]
+        },
+        "tier": "T1_CRITICAL",
+        "decision": "NO_ORDER",
+        "quantity": 0,
+        "primary_rule": "HOLD-ABOVE-ROP",
+        "rules_applied": [
+          "TIER-1",
+          "HOLD-ABOVE-ROP"
+        ],
+        "flags": [
+          "WATCH"
+        ],
+        "priority": 0.0,
+        "route": "NONE",
+        "route_reasons": [],
+        "policy_version": "1.0.0",
+        "decision_hash": "bb9db3cfdae2f8ef"
+      },
+      "narrative": {
+        "justification": "No order: this part is used by all 9 bike models in the catalogue, making it CRITICAL. Inventory position of 99 units is above the reorder point of 90, so stock is adequate for now despite two dependent models running low on finished bikes.",
+        "quantity_explanation": "An order triggers when inventory position falls to 90 units or below. Current position of 99 is sufficient to cover 2.2 cycles of demand at the CRITICAL safety level.",
+        "source": "LLM"
+      },
+      "final_route": "NONE",
+      "review_reasons": [],
+      "concerns": [],
+      "violations": []
+    },
+    {
+      "decision": {
+        "facts": {
+          "part_key": "high performance derailleur",
+          "item_name": "High-Performance Derailleur",
+          "supplier": "Shimano",
+          "description": "Enhanced derailleur for smoother gear transitions.",
+          "on_hand": 64,
+          "on_order": 0,
+          "inventory_position": 64,
+          "used_by": [
+            "Carrera SubwayE",
+            "Carrera Crossfuse",
+            "EveryDay Vibin'"
+          ],
+          "fan_out": 3,
+          "catalogue_size": 9,
+          "share": 0.3333,
+          "units_per_bike": 1,
+          "units_source": "DEFAULT",
+          "fg_by_model": {
+            "Carrera SubwayE": 9,
+            "Carrera Crossfuse": 80,
+            "EveryDay Vibin'": 79
+          },
+          "exposed_models": [
+            "Carrera SubwayE"
+          ],
+          "data_issues": []
+        },
+        "calc": {
+          "k": 5.0,
+          "cycle_demand": 15.0,
+          "safety_cycles": 0.5,
+          "reorder_point": 23,
+          "order_up_to": 38,
+          "cover_before": 4.27,
+          "cover_after": null,
+          "raw_quantity": 0,
+          "lot": 1,
+          "steps": [
+            {
+              "rule_id": "TIER-2",
+              "expression": "used by 3 of 9 bike models (share 0.33)",
+              "value": 0.3333
+            },
+            {
+              "rule_id": null,
+              "expression": "D = K x q x f = 5 x 1 x 3 = 15 units/cycle",
+              "value": 15.0
+            },
+            {
+              "rule_id": null,
+              "expression": "ROP = ceil((LT + ss) x D) = ceil((1 + 0.5) x 15) = 23",
+              "value": 23.0
+            },
+            {
+              "rule_id": null,
+              "expression": "OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0.5) x 15) = 38",
+              "value": 38.0
+            },
+            {
+              "rule_id": null,
+              "expression": "IP = on hand + on order = 64 + 0 = 64",
+              "value": 64.0
+            }
+          ]
+        },
+        "tier": "T2_SHARED",
+        "decision": "NO_ORDER",
+        "quantity": 0,
+        "primary_rule": "HOLD-ABOVE-ROP",
+        "rules_applied": [
+          "TIER-2",
+          "HOLD-ABOVE-ROP"
+        ],
+        "flags": [],
+        "priority": 0.0,
+        "route": "NONE",
+        "route_reasons": [],
+        "policy_version": "1.0.0",
+        "decision_hash": "dfaa79821e01381c"
+      },
+      "narrative": {
+        "justification": "No order: this part is used by 3 of 9 bike models and inventory position 64 is well above the reorder point of 23, so stock is adequate. One dependent model has low finished-bike stock, but the part itself is not at risk.",
+        "quantity_explanation": "An order would trigger when inventory position falls to 23 or below. Current stock of 64 covers 4.27 cycles of demand at 15 units per cycle.",
+        "source": "LLM"
+      },
+      "final_route": "NONE",
+      "review_reasons": [],
+      "concerns": [],
+      "violations": []
+    },
+    {
+      "decision": {
+        "facts": {
+          "part_key": "high traction pedals",
+          "item_name": "High-Traction Pedals",
+          "supplier": "Look",
+          "description": "Durable pedals with enhanced grip for rough terrains.",
+          "on_hand": 86,
+          "on_order": 0,
+          "inventory_position": 86,
+          "used_by": [
+            "CityWide Lite",
+            "EveryDay Cruiser"
+          ],
+          "fan_out": 2,
+          "catalogue_size": 9,
+          "share": 0.2222,
+          "units_per_bike": 2,
+          "units_source": "OVERRIDE",
+          "fg_by_model": {
+            "CityWide Lite": 95,
+            "EveryDay Cruiser": 94
+          },
+          "exposed_models": [],
+          "data_issues": []
+        },
+        "calc": {
+          "k": 5.0,
+          "cycle_demand": 20.0,
+          "safety_cycles": 0.5,
+          "reorder_point": 30,
+          "order_up_to": 50,
+          "cover_before": 4.3,
+          "cover_after": null,
+          "raw_quantity": 0,
+          "lot": 1,
+          "steps": [
+            {
+              "rule_id": "TIER-2",
+              "expression": "used by 2 of 9 bike models (share 0.22)",
+              "value": 0.2222
+            },
+            {
+              "rule_id": null,
+              "expression": "D = K x q x f = 5 x 2 x 2 = 20 units/cycle",
+              "value": 20.0
+            },
+            {
+              "rule_id": null,
+              "expression": "ROP = ceil((LT + ss) x D) = ceil((1 + 0.5) x 20) = 30",
+              "value": 30.0
+            },
+            {
+              "rule_id": null,
+              "expression": "OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0.5) x 20) = 50",
+              "value": 50.0
+            },
+            {
+              "rule_id": null,
+              "expression": "IP = on hand + on order = 86 + 0 = 86",
+              "value": 86.0
+            }
+          ]
+        },
+        "tier": "T2_SHARED",
+        "decision": "NO_ORDER",
+        "quantity": 0,
+        "primary_rule": "HOLD-ABOVE-ROP",
+        "rules_applied": [
+          "TIER-2",
+          "HOLD-ABOVE-ROP"
+        ],
+        "flags": [],
+        "priority": 0.0,
+        "route": "NONE",
+        "route_reasons": [],
+        "policy_version": "1.0.0",
+        "decision_hash": "649cfcbb71d5c6e0"
+      },
+      "narrative": {
+        "justification": "No order: this part is used by 2 of 9 bike models and inventory position 86 is well above the reorder point of 30, so stock is adequate for current demand.",
+        "quantity_explanation": "An order would trigger when inventory position falls to 30 or below. Current stock of 86 covers 4.3 cycles of demand at 20 units per cycle.",
+        "source": "LLM"
+      },
+      "final_route": "NONE",
+      "review_reasons": [],
+      "concerns": [],
+      "violations": []
+    },
+    {
+      "decision": {
+        "facts": {
+          "part_key": "hydraulic suspension fork",
+          "item_name": "Hydraulic Suspension Fork",
+          "supplier": "Fox",
+          "description": "A durable front suspension fork with hydraulic damping.",
+          "on_hand": 16,
+          "on_order": 119,
+          "inventory_position": 135,
+          "used_by": [
+            "Carrera Subway",
+            "Carrera SubwayE",
+            "Carrera Crossfuse",
+            "CityWide Lite",
+            "CityWide Chill",
+            "LongHaul",
+            "EveryDay Cruiser",
+            "EveryDay Vibin'",
+            "EveryDay"
+          ],
+          "fan_out": 9,
+          "catalogue_size": 9,
+          "share": 1.0,
+          "units_per_bike": 1,
+          "units_source": "DEFAULT",
+          "fg_by_model": {
+            "Carrera Subway": 96,
+            "Carrera SubwayE": 9,
+            "Carrera Crossfuse": 80,
+            "CityWide Lite": 95,
+            "CityWide Chill": 21,
+            "LongHaul": 52,
+            "EveryDay Cruiser": 94,
+            "EveryDay Vibin'": 79,
+            "EveryDay": 96
+          },
+          "exposed_models": [
+            "Carrera SubwayE",
+            "CityWide Chill"
+          ],
+          "data_issues": []
+        },
+        "calc": {
+          "k": 5.0,
+          "cycle_demand": 45.0,
+          "safety_cycles": 1.0,
+          "reorder_point": 90,
+          "order_up_to": 135,
+          "cover_before": 3.0,
+          "cover_after": null,
+          "raw_quantity": 0,
+          "lot": 1,
+          "steps": [
+            {
+              "rule_id": "TIER-1",
+              "expression": "used by 9 of 9 bike models (share 1.00)",
+              "value": 1.0
+            },
+            {
+              "rule_id": null,
+              "expression": "D = K x q x f = 5 x 1 x 9 = 45 units/cycle",
+              "value": 45.0
+            },
+            {
+              "rule_id": null,
+              "expression": "ROP = ceil((LT + ss) x D) = ceil((1 + 1) x 45) = 90",
+              "value": 90.0
+            },
+            {
+              "rule_id": null,
+              "expression": "OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 1) x 45) = 135",
+              "value": 135.0
+            },
+            {
+              "rule_id": null,
+              "expression": "IP = on hand + on order = 16 + 119 = 135",
+              "value": 135.0
+            }
+          ]
+        },
+        "tier": "T1_CRITICAL",
+        "decision": "NO_ORDER",
+        "quantity": 0,
+        "primary_rule": "HOLD-OPEN-PO",
+        "rules_applied": [
+          "TIER-1",
+          "HOLD-OPEN-PO"
+        ],
+        "flags": [],
+        "priority": 0.0,
+        "route": "NONE",
+        "route_reasons": [],
+        "policy_version": "1.0.0",
+        "decision_hash": "e38b80c7b0d2000b"
+      },
+      "narrative": {
+        "justification": "No order: this fork is used by all 9 bike models in the catalogue, making it CRITICAL. An open purchase order for 119 units is already in flight, bringing inventory position to 135, which is at the order-up-to level. No second order is needed.",
+        "quantity_explanation": "Inventory position 135 equals the order-up-to level of 135. The open PO lifts stock above the reorder point of 90, so no additional order triggers. An order will be placed only if inventory position falls to 90 or below.",
+        "source": "LLM"
+      },
+      "final_route": "NONE",
+      "review_reasons": [],
+      "concerns": [],
+      "violations": []
+    },
+    {
+      "decision": {
+        "facts": {
+          "part_key": "lightweight alloy wheels",
+          "item_name": "Lightweight Alloy Wheels",
+          "supplier": "Mavic",
+          "description": "Premium alloy wheels offering a balance of strength and low weight.",
+          "on_hand": 15,
+          "on_order": 35,
+          "inventory_position": 50,
+          "used_by": [
+            "CityWide Lite",
+            "EveryDay Cruiser"
+          ],
+          "fan_out": 2,
+          "catalogue_size": 9,
+          "share": 0.2222,
+          "units_per_bike": 2,
+          "units_source": "OVERRIDE",
+          "fg_by_model": {
+            "CityWide Lite": 95,
+            "EveryDay Cruiser": 94
+          },
+          "exposed_models": [],
+          "data_issues": []
+        },
+        "calc": {
+          "k": 5.0,
+          "cycle_demand": 20.0,
+          "safety_cycles": 0.5,
+          "reorder_point": 30,
+          "order_up_to": 50,
+          "cover_before": 2.5,
+          "cover_after": null,
+          "raw_quantity": 0,
+          "lot": 1,
+          "steps": [
+            {
+              "rule_id": "TIER-2",
+              "expression": "used by 2 of 9 bike models (share 0.22)",
+              "value": 0.2222
+            },
+            {
+              "rule_id": null,
+              "expression": "D = K x q x f = 5 x 2 x 2 = 20 units/cycle",
+              "value": 20.0
+            },
+            {
+              "rule_id": null,
+              "expression": "ROP = ceil((LT + ss) x D) = ceil((1 + 0.5) x 20) = 30",
+              "value": 30.0
+            },
+            {
+              "rule_id": null,
+              "expression": "OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0.5) x 20) = 50",
+              "value": 50.0
+            },
+            {
+              "rule_id": null,
+              "expression": "IP = on hand + on order = 15 + 35 = 50",
+              "value": 50.0
+            }
+          ]
+        },
+        "tier": "T2_SHARED",
+        "decision": "NO_ORDER",
+        "quantity": 0,
+        "primary_rule": "HOLD-OPEN-PO",
+        "rules_applied": [
+          "TIER-2",
+          "HOLD-OPEN-PO"
+        ],
+        "flags": [],
+        "priority": 0.0,
+        "route": "NONE",
+        "route_reasons": [],
+        "policy_version": "1.0.0",
+        "decision_hash": "cc8c0b5bbbe5ba89"
+      },
+      "narrative": {
+        "justification": "No order: this part is used by 2 of 9 bike models and an open purchase order for 35 units is already in flight. Combined with 15 units on hand, inventory position of 50 exactly meets the order-up-to level, so no additional stock is needed.",
+        "quantity_explanation": "Inventory position 50 equals the order-up-to level of 50. The open PO of 35 units lifts stock above the reorder point of 30, so no new order is triggered.",
+        "source": "LLM"
+      },
+      "final_route": "NONE",
+      "review_reasons": [],
+      "concerns": [],
+      "violations": []
+    },
+    {
+      "decision": {
+        "facts": {
+          "part_key": "lightweight steel frame",
+          "item_name": "Lightweight Steel Frame",
+          "supplier": "Giant",
+          "description": "Durable steel frame offering strength and lightweight performance.",
+          "on_hand": 22,
+          "on_order": 16,
+          "inventory_position": 38,
+          "used_by": [
+            "Carrera SubwayE",
+            "Carrera Crossfuse",
+            "EveryDay Vibin'"
+          ],
+          "fan_out": 3,
+          "catalogue_size": 9,
+          "share": 0.3333,
+          "units_per_bike": 1,
+          "units_source": "DEFAULT",
+          "fg_by_model": {
+            "Carrera SubwayE": 9,
+            "Carrera Crossfuse": 80,
+            "EveryDay Vibin'": 79
+          },
+          "exposed_models": [
+            "Carrera SubwayE"
+          ],
+          "data_issues": []
+        },
+        "calc": {
+          "k": 5.0,
+          "cycle_demand": 15.0,
+          "safety_cycles": 0.5,
+          "reorder_point": 23,
+          "order_up_to": 38,
+          "cover_before": 2.53,
+          "cover_after": null,
+          "raw_quantity": 0,
+          "lot": 1,
+          "steps": [
+            {
+              "rule_id": "TIER-2",
+              "expression": "used by 3 of 9 bike models (share 0.33)",
+              "value": 0.3333
+            },
+            {
+              "rule_id": null,
+              "expression": "D = K x q x f = 5 x 1 x 3 = 15 units/cycle",
+              "value": 15.0
+            },
+            {
+              "rule_id": null,
+              "expression": "ROP = ceil((LT + ss) x D) = ceil((1 + 0.5) x 15) = 23",
+              "value": 23.0
+            },
+            {
+              "rule_id": null,
+              "expression": "OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0.5) x 15) = 38",
+              "value": 38.0
+            },
+            {
+              "rule_id": null,
+              "expression": "IP = on hand + on order = 22 + 16 = 38",
+              "value": 38.0
+            }
+          ]
+        },
+        "tier": "T2_SHARED",
+        "decision": "NO_ORDER",
+        "quantity": 0,
+        "primary_rule": "HOLD-OPEN-PO",
+        "rules_applied": [
+          "TIER-2",
+          "HOLD-OPEN-PO"
+        ],
+        "flags": [],
+        "priority": 0.0,
+        "route": "NONE",
+        "route_reasons": [],
+        "policy_version": "1.0.0",
+        "decision_hash": "97b51956b8539cef"
+      },
+      "narrative": {
+        "justification": "No order: this frame is used by 3 of 9 bike models and inventory position is 38 units, exactly at the order-up-to level. A purchase order for 16 units is already open, so reordering now would exceed the target stock level.",
+        "quantity_explanation": "An order would trigger only if inventory position falls to 23 or below. The open PO will bring stock to target without a second order.",
+        "source": "LLM"
+      },
+      "final_route": "NONE",
+      "review_reasons": [],
+      "concerns": [],
+      "violations": []
+    },
+    {
+      "decision": {
+        "facts": {
+          "part_key": "performance front derailleur",
+          "item_name": "Performance Front Derailleur",
+          "supplier": "Shimano",
+          "description": "Reliable front derailleur for smooth and responsive shifts.",
+          "on_hand": 7,
+          "on_order": 0,
+          "inventory_position": 7,
+          "used_by": [
+            "EveryDay"
+          ],
+          "fan_out": 1,
+          "catalogue_size": 9,
+          "share": 0.1111,
+          "units_per_bike": 1,
+          "units_source": "DEFAULT",
+          "fg_by_model": {
+            "EveryDay": 96
+          },
+          "exposed_models": [],
+          "data_issues": []
+        },
+        "calc": {
+          "k": 5.0,
+          "cycle_demand": 5.0,
+          "safety_cycles": 0.0,
+          "reorder_point": 5,
+          "order_up_to": 10,
+          "cover_before": 1.4,
+          "cover_after": null,
+          "raw_quantity": 0,
+          "lot": 1,
+          "steps": [
+            {
+              "rule_id": "TIER-3",
+              "expression": "used by 1 of 9 bike models (share 0.11)",
+              "value": 0.1111
+            },
+            {
+              "rule_id": null,
+              "expression": "D = K x q x f = 5 x 1 x 1 = 5 units/cycle",
+              "value": 5.0
+            },
+            {
+              "rule_id": null,
+              "expression": "ROP = ceil((LT + ss) x D) = ceil((1 + 0) x 5) = 5",
+              "value": 5.0
+            },
+            {
+              "rule_id": null,
+              "expression": "OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0) x 5) = 10",
+              "value": 10.0
+            },
+            {
+              "rule_id": null,
+              "expression": "IP = on hand + on order = 7 + 0 = 7",
+              "value": 7.0
+            }
+          ]
+        },
+        "tier": "T3_SINGLE",
+        "decision": "NO_ORDER",
+        "quantity": 0,
+        "primary_rule": "HOLD-ABOVE-ROP",
+        "rules_applied": [
+          "TIER-3",
+          "HOLD-ABOVE-ROP"
+        ],
+        "flags": [],
+        "priority": 0.0,
+        "route": "NONE",
+        "route_reasons": [],
+        "policy_version": "1.0.0",
+        "decision_hash": "1201bf3d2b4e73d4"
+      },
+      "narrative": {
+        "justification": "No order: only the EveryDay model uses this derailleur and inventory position 7 is above the reorder point of 5, so stock is adequate for the current cycle.",
+        "quantity_explanation": "An order would trigger only if inventory position falls to 5 or below. Current position of 7 covers 1.4 cycles of demand.",
+        "source": "LLM"
+      },
+      "final_route": "NONE",
+      "review_reasons": [],
+      "concerns": [],
+      "violations": []
+    },
+    {
+      "decision": {
+        "facts": {
+          "part_key": "pro grade front derailleur",
+          "item_name": "Pro-Grade Front Derailleur",
+          "supplier": "Campagnolo",
+          "description": "Advanced derailleur for precise and consistent front shifting.",
+          "on_hand": 51,
+          "on_order": 0,
+          "inventory_position": 51,
+          "used_by": [
+            "CityWide Chill",
+            "LongHaul"
+          ],
+          "fan_out": 2,
+          "catalogue_size": 9,
+          "share": 0.2222,
+          "units_per_bike": 1,
+          "units_source": "DEFAULT",
+          "fg_by_model": {
+            "CityWide Chill": 21,
+            "LongHaul": 52
+          },
+          "exposed_models": [
+            "CityWide Chill"
+          ],
+          "data_issues": []
+        },
+        "calc": {
+          "k": 5.0,
+          "cycle_demand": 10.0,
+          "safety_cycles": 0.5,
+          "reorder_point": 15,
+          "order_up_to": 25,
+          "cover_before": 5.1,
+          "cover_after": null,
+          "raw_quantity": 0,
+          "lot": 1,
+          "steps": [
+            {
+              "rule_id": "TIER-2",
+              "expression": "used by 2 of 9 bike models (share 0.22)",
+              "value": 0.2222
+            },
+            {
+              "rule_id": null,
+              "expression": "D = K x q x f = 5 x 1 x 2 = 10 units/cycle",
+              "value": 10.0
+            },
+            {
+              "rule_id": null,
+              "expression": "ROP = ceil((LT + ss) x D) = ceil((1 + 0.5) x 10) = 15",
+              "value": 15.0
+            },
+            {
+              "rule_id": null,
+              "expression": "OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0.5) x 10) = 25",
+              "value": 25.0
+            },
+            {
+              "rule_id": null,
+              "expression": "IP = on hand + on order = 51 + 0 = 51",
+              "value": 51.0
+            }
+          ]
+        },
+        "tier": "T2_SHARED",
+        "decision": "NO_ORDER",
+        "quantity": 0,
+        "primary_rule": "HOLD-ABOVE-ROP",
+        "rules_applied": [
+          "TIER-2",
+          "HOLD-ABOVE-ROP"
+        ],
+        "flags": [
+          "EXCESS",
+          "FG_EXPOSED"
+        ],
+        "priority": 0.0,
+        "route": "NONE",
+        "route_reasons": [],
+        "policy_version": "1.0.0",
+        "decision_hash": "d8d03c9e2b0954cf"
+      },
+      "narrative": {
+        "justification": "No order: this derailleur is used by 2 of 9 bike models and inventory position 51 is well above the reorder point of 15, so stock is adequate. One dependent model has low finished-bike stock, but the part itself is not at risk.",
+        "quantity_explanation": "An order would trigger when inventory position falls to 15 or below. Current stock of 51 covers 5.1 cycles of demand at the SHARED safety level.",
+        "source": "LLM"
+      },
+      "final_route": "NONE",
+      "review_reasons": [],
+      "concerns": [],
+      "violations": []
+    },
+    {
+      "decision": {
+        "facts": {
+          "part_key": "racing alloy wheels",
+          "item_name": "Racing Alloy Wheels",
+          "supplier": "Mavic",
+          "description": "High-performance alloy wheels designed for racing speeds.",
+          "on_hand": 92,
+          "on_order": 0,
+          "inventory_position": 92,
+          "used_by": [
+            "CityWide Chill",
+            "LongHaul"
+          ],
+          "fan_out": 2,
+          "catalogue_size": 9,
+          "share": 0.2222,
+          "units_per_bike": 2,
+          "units_source": "OVERRIDE",
+          "fg_by_model": {
+            "CityWide Chill": 21,
+            "LongHaul": 52
+          },
+          "exposed_models": [
+            "CityWide Chill"
+          ],
+          "data_issues": []
+        },
+        "calc": {
+          "k": 5.0,
+          "cycle_demand": 20.0,
+          "safety_cycles": 0.5,
+          "reorder_point": 30,
+          "order_up_to": 50,
+          "cover_before": 4.6,
+          "cover_after": null,
+          "raw_quantity": 0,
+          "lot": 1,
+          "steps": [
+            {
+              "rule_id": "TIER-2",
+              "expression": "used by 2 of 9 bike models (share 0.22)",
+              "value": 0.2222
+            },
+            {
+              "rule_id": null,
+              "expression": "D = K x q x f = 5 x 2 x 2 = 20 units/cycle",
+              "value": 20.0
+            },
+            {
+              "rule_id": null,
+              "expression": "ROP = ceil((LT + ss) x D) = ceil((1 + 0.5) x 20) = 30",
+              "value": 30.0
+            },
+            {
+              "rule_id": null,
+              "expression": "OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0.5) x 20) = 50",
+              "value": 50.0
+            },
+            {
+              "rule_id": null,
+              "expression": "IP = on hand + on order = 92 + 0 = 92",
+              "value": 92.0
+            }
+          ]
+        },
+        "tier": "T2_SHARED",
+        "decision": "NO_ORDER",
+        "quantity": 0,
+        "primary_rule": "HOLD-ABOVE-ROP",
+        "rules_applied": [
+          "TIER-2",
+          "HOLD-ABOVE-ROP"
+        ],
+        "flags": [
+          "FG_EXPOSED"
+        ],
+        "priority": 0.0,
+        "route": "NONE",
+        "route_reasons": [],
+        "policy_version": "1.0.0",
+        "decision_hash": "ec3c863a0e599795"
+      },
+      "narrative": {
+        "justification": "No order: this part is used by 2 of 9 bike models and inventory position 92 is well above the reorder point of 30, so stock is adequate. One dependent model has low finished-bike stock, but the part itself does not yet need reordering.",
+        "quantity_explanation": "An order triggers when inventory position falls to 30 or below. Current stock of 92 covers 4.6 cycles of demand at 20 units per cycle.",
+        "source": "LLM"
+      },
+      "final_route": "NONE",
+      "review_reasons": [],
+      "concerns": [],
+      "violations": []
+    },
+    {
+      "decision": {
+        "facts": {
+          "part_key": "rear derailleur mechanism",
+          "item_name": "Rear Derailleur Mechanism",
+          "supplier": "SRAM",
+          "description": "Provides smooth gear shifting at the rear wheel.",
+          "on_hand": 19,
+          "on_order": 120,
+          "inventory_position": 139,
+          "used_by": [
+            "Carrera Subway",
+            "Carrera SubwayE",
+            "Carrera Crossfuse",
+            "CityWide Lite",
+            "CityWide Chill",
+            "LongHaul",
+            "EveryDay Cruiser",
+            "EveryDay Vibin'",
+            "EveryDay"
+          ],
+          "fan_out": 9,
+          "catalogue_size": 9,
+          "share": 1.0,
+          "units_per_bike": 1,
+          "units_source": "DEFAULT",
+          "fg_by_model": {
+            "Carrera Subway": 96,
+            "Carrera SubwayE": 9,
+            "Carrera Crossfuse": 80,
+            "CityWide Lite": 95,
+            "CityWide Chill": 21,
+            "LongHaul": 52,
+            "EveryDay Cruiser": 94,
+            "EveryDay Vibin'": 79,
+            "EveryDay": 96
+          },
+          "exposed_models": [
+            "Carrera SubwayE",
+            "CityWide Chill"
+          ],
+          "data_issues": []
+        },
+        "calc": {
+          "k": 5.0,
+          "cycle_demand": 45.0,
+          "safety_cycles": 1.0,
+          "reorder_point": 90,
+          "order_up_to": 135,
+          "cover_before": 3.09,
+          "cover_after": null,
+          "raw_quantity": 0,
+          "lot": 1,
+          "steps": [
+            {
+              "rule_id": "TIER-1",
+              "expression": "used by 9 of 9 bike models (share 1.00)",
+              "value": 1.0
+            },
+            {
+              "rule_id": null,
+              "expression": "D = K x q x f = 5 x 1 x 9 = 45 units/cycle",
+              "value": 45.0
+            },
+            {
+              "rule_id": null,
+              "expression": "ROP = ceil((LT + ss) x D) = ceil((1 + 1) x 45) = 90",
+              "value": 90.0
+            },
+            {
+              "rule_id": null,
+              "expression": "OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 1) x 45) = 135",
+              "value": 135.0
+            },
+            {
+              "rule_id": null,
+              "expression": "IP = on hand + on order = 19 + 120 = 139",
+              "value": 139.0
+            }
+          ]
+        },
+        "tier": "T1_CRITICAL",
+        "decision": "NO_ORDER",
+        "quantity": 0,
+        "primary_rule": "HOLD-OPEN-PO",
+        "rules_applied": [
+          "TIER-1",
+          "HOLD-OPEN-PO"
+        ],
+        "flags": [],
+        "priority": 0.0,
+        "route": "NONE",
+        "route_reasons": [],
+        "policy_version": "1.0.0",
+        "decision_hash": "40708640ad3c7514"
+      },
+      "narrative": {
+        "justification": "No order: this part is CRITICAL, used by all 9 bike models in the catalogue. An open purchase order for 120 units is already in flight, bringing inventory position to 139, which exceeds the reorder point of 90. The part is well covered.",
+        "quantity_explanation": "Inventory position 139 is above the reorder point of 90, so no order is triggered. The open PO of 120 units is sufficient to maintain cover. An order would be placed only if inventory position falls to 90 or below.",
+        "source": "LLM"
+      },
+      "final_route": "NONE",
+      "review_reasons": [],
+      "concerns": [],
+      "violations": []
+    },
+    {
+      "decision": {
+        "facts": {
+          "part_key": "reinforced alloy wheels",
+          "item_name": "Reinforced Alloy Wheels",
+          "supplier": "Mavic",
+          "description": "Upgraded wheels for high durability and performance.",
+          "on_hand": 91,
+          "on_order": 0,
+          "inventory_position": 91,
+          "used_by": [
+            "Carrera SubwayE",
+            "Carrera Crossfuse",
+            "EveryDay Vibin'"
+          ],
+          "fan_out": 3,
+          "catalogue_size": 9,
+          "share": 0.3333,
+          "units_per_bike": 2,
+          "units_source": "OVERRIDE",
+          "fg_by_model": {
+            "Carrera SubwayE": 9,
+            "Carrera Crossfuse": 80,
+            "EveryDay Vibin'": 79
+          },
+          "exposed_models": [
+            "Carrera SubwayE"
+          ],
+          "data_issues": []
+        },
+        "calc": {
+          "k": 5.0,
+          "cycle_demand": 30.0,
+          "safety_cycles": 0.5,
+          "reorder_point": 45,
+          "order_up_to": 75,
+          "cover_before": 3.03,
+          "cover_after": null,
+          "raw_quantity": 0,
+          "lot": 1,
+          "steps": [
+            {
+              "rule_id": "TIER-2",
+              "expression": "used by 3 of 9 bike models (share 0.33)",
+              "value": 0.3333
+            },
+            {
+              "rule_id": null,
+              "expression": "D = K x q x f = 5 x 2 x 3 = 30 units/cycle",
+              "value": 30.0
+            },
+            {
+              "rule_id": null,
+              "expression": "ROP = ceil((LT + ss) x D) = ceil((1 + 0.5) x 30) = 45",
+              "value": 45.0
+            },
+            {
+              "rule_id": null,
+              "expression": "OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0.5) x 30) = 75",
+              "value": 75.0
+            },
+            {
+              "rule_id": null,
+              "expression": "IP = on hand + on order = 91 + 0 = 91",
+              "value": 91.0
+            }
+          ]
+        },
+        "tier": "T2_SHARED",
+        "decision": "NO_ORDER",
+        "quantity": 0,
+        "primary_rule": "HOLD-ABOVE-ROP",
+        "rules_applied": [
+          "TIER-2",
+          "HOLD-ABOVE-ROP"
+        ],
+        "flags": [],
+        "priority": 0.0,
+        "route": "NONE",
+        "route_reasons": [],
+        "policy_version": "1.0.0",
+        "decision_hash": "2e68a67dfd2dbe0a"
+      },
+      "narrative": {
+        "justification": "No order: three bike models use these wheels and inventory position 91 is well above the reorder point of 45, so stock is adequate. One dependent model has low finished-bike stock, but the part itself is not at risk.",
+        "quantity_explanation": "An order would trigger when inventory position falls to 45 or below. Current position of 91 covers 3.03 cycles of demand at 30 units per cycle.",
+        "source": "LLM"
+      },
+      "final_route": "NONE",
+      "review_reasons": [],
+      "concerns": [],
+      "violations": []
+    },
+    {
+      "decision": {
+        "facts": {
+          "part_key": "reinforced carbon frame",
+          "item_name": "Reinforced Carbon Frame",
+          "supplier": "Trek",
+          "description": "A robust carbon frame designed for endurance and strength.",
+          "on_hand": 70,
+          "on_order": 0,
+          "inventory_position": 70,
+          "used_by": [
+            "CityWide Lite",
+            "EveryDay Cruiser"
+          ],
+          "fan_out": 2,
+          "catalogue_size": 9,
+          "share": 0.2222,
+          "units_per_bike": 1,
+          "units_source": "DEFAULT",
+          "fg_by_model": {
+            "CityWide Lite": 95,
+            "EveryDay Cruiser": 94
+          },
+          "exposed_models": [],
+          "data_issues": []
+        },
+        "calc": {
+          "k": 5.0,
+          "cycle_demand": 10.0,
+          "safety_cycles": 0.5,
+          "reorder_point": 15,
+          "order_up_to": 25,
+          "cover_before": 7.0,
+          "cover_after": null,
+          "raw_quantity": 0,
+          "lot": 1,
+          "steps": [
+            {
+              "rule_id": "TIER-2",
+              "expression": "used by 2 of 9 bike models (share 0.22)",
+              "value": 0.2222
+            },
+            {
+              "rule_id": null,
+              "expression": "D = K x q x f = 5 x 1 x 2 = 10 units/cycle",
+              "value": 10.0
+            },
+            {
+              "rule_id": null,
+              "expression": "ROP = ceil((LT + ss) x D) = ceil((1 + 0.5) x 10) = 15",
+              "value": 15.0
+            },
+            {
+              "rule_id": null,
+              "expression": "OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0.5) x 10) = 25",
+              "value": 25.0
+            },
+            {
+              "rule_id": null,
+              "expression": "IP = on hand + on order = 70 + 0 = 70",
+              "value": 70.0
+            }
+          ]
+        },
+        "tier": "T2_SHARED",
+        "decision": "NO_ORDER",
+        "quantity": 0,
+        "primary_rule": "HOLD-ABOVE-ROP",
+        "rules_applied": [
+          "TIER-2",
+          "HOLD-ABOVE-ROP"
+        ],
+        "flags": [
+          "EXCESS"
+        ],
+        "priority": 0.0,
+        "route": "NONE",
+        "route_reasons": [],
+        "policy_version": "1.0.0",
+        "decision_hash": "79ad8cfbbd84fb14"
+      },
+      "narrative": {
+        "justification": "No order: this frame is used by 2 of 9 bike models and inventory position of 70 units is well above the reorder point of 15, providing 7 cycles of cover. Reordering is not yet needed.",
+        "quantity_explanation": "An order would trigger when inventory position falls to 15 units or below. Current stock of 70 is sufficient for near-term demand.",
+        "source": "LLM"
+      },
+      "final_route": "NONE",
+      "review_reasons": [],
+      "concerns": [],
+      "violations": []
+    },
+    {
+      "decision": {
+        "facts": {
+          "part_key": "trail ready pedals",
+          "item_name": "Trail-Ready Pedals",
+          "supplier": "Crankbrothers",
+          "description": "Durable pedals with added grip for off-road cycling.",
+          "on_hand": 24,
+          "on_order": 0,
+          "inventory_position": 24,
+          "used_by": [
+            "EveryDay"
+          ],
+          "fan_out": 1,
+          "catalogue_size": 9,
+          "share": 0.1111,
+          "units_per_bike": 2,
+          "units_source": "OVERRIDE",
+          "fg_by_model": {
+            "EveryDay": 96
+          },
+          "exposed_models": [],
+          "data_issues": []
+        },
+        "calc": {
+          "k": 5.0,
+          "cycle_demand": 10.0,
+          "safety_cycles": 0.0,
+          "reorder_point": 10,
+          "order_up_to": 20,
+          "cover_before": 2.4,
+          "cover_after": null,
+          "raw_quantity": 0,
+          "lot": 1,
+          "steps": [
+            {
+              "rule_id": "TIER-3",
+              "expression": "used by 1 of 9 bike models (share 0.11)",
+              "value": 0.1111
+            },
+            {
+              "rule_id": null,
+              "expression": "D = K x q x f = 5 x 2 x 1 = 10 units/cycle",
+              "value": 10.0
+            },
+            {
+              "rule_id": null,
+              "expression": "ROP = ceil((LT + ss) x D) = ceil((1 + 0) x 10) = 10",
+              "value": 10.0
+            },
+            {
+              "rule_id": null,
+              "expression": "OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0) x 10) = 20",
+              "value": 20.0
+            },
+            {
+              "rule_id": null,
+              "expression": "IP = on hand + on order = 24 + 0 = 24",
+              "value": 24.0
+            }
+          ]
+        },
+        "tier": "T3_SINGLE",
+        "decision": "NO_ORDER",
+        "quantity": 0,
+        "primary_rule": "HOLD-ABOVE-ROP",
+        "rules_applied": [
+          "TIER-3",
+          "HOLD-ABOVE-ROP"
+        ],
+        "flags": [],
+        "priority": 0.0,
+        "route": "NONE",
+        "route_reasons": [],
+        "policy_version": "1.0.0",
+        "decision_hash": "9df6ddc891e9d21e"
+      },
+      "narrative": {
+        "justification": "No order: this part is used by only one bike model and inventory position 24 is well above the reorder point of 10, so stock is adequate.",
+        "quantity_explanation": "An order would trigger when inventory position falls to 10 or below. Current stock of 24 covers 2.4 cycles of demand at 10 units per cycle.",
+        "source": "LLM"
+      },
+      "final_route": "NONE",
+      "review_reasons": [],
+      "concerns": [],
+      "violations": []
+    },
+    {
+      "decision": {
+        "facts": {
+          "part_key": "ultra grip pedals",
+          "item_name": "Ultra-Grip Pedals",
+          "supplier": "Look",
+          "description": "Top-grade pedals with superior grip for competitive cycling.",
+          "on_hand": 93,
+          "on_order": 0,
+          "inventory_position": 93,
+          "used_by": [
+            "CityWide Chill",
+            "LongHaul"
+          ],
+          "fan_out": 2,
+          "catalogue_size": 9,
+          "share": 0.2222,
+          "units_per_bike": 2,
+          "units_source": "OVERRIDE",
+          "fg_by_model": {
+            "CityWide Chill": 21,
+            "LongHaul": 52
+          },
+          "exposed_models": [
+            "CityWide Chill"
+          ],
+          "data_issues": []
+        },
+        "calc": {
+          "k": 5.0,
+          "cycle_demand": 20.0,
+          "safety_cycles": 0.5,
+          "reorder_point": 30,
+          "order_up_to": 50,
+          "cover_before": 4.65,
+          "cover_after": null,
+          "raw_quantity": 0,
+          "lot": 1,
+          "steps": [
+            {
+              "rule_id": "TIER-2",
+              "expression": "used by 2 of 9 bike models (share 0.22)",
+              "value": 0.2222
+            },
+            {
+              "rule_id": null,
+              "expression": "D = K x q x f = 5 x 2 x 2 = 20 units/cycle",
+              "value": 20.0
+            },
+            {
+              "rule_id": null,
+              "expression": "ROP = ceil((LT + ss) x D) = ceil((1 + 0.5) x 20) = 30",
+              "value": 30.0
+            },
+            {
+              "rule_id": null,
+              "expression": "OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0.5) x 20) = 50",
+              "value": 50.0
+            },
+            {
+              "rule_id": null,
+              "expression": "IP = on hand + on order = 93 + 0 = 93",
+              "value": 93.0
+            }
+          ]
+        },
+        "tier": "T2_SHARED",
+        "decision": "NO_ORDER",
+        "quantity": 0,
+        "primary_rule": "HOLD-ABOVE-ROP",
+        "rules_applied": [
+          "TIER-2",
+          "HOLD-ABOVE-ROP"
+        ],
+        "flags": [
+          "FG_EXPOSED"
+        ],
+        "priority": 0.0,
+        "route": "NONE",
+        "route_reasons": [],
+        "policy_version": "1.0.0",
+        "decision_hash": "023e26cb6568fe78"
+      },
+      "narrative": {
+        "justification": "No order: this part is used by 2 of 9 bike models and inventory position 93 is well above the reorder point of 30, so stock is adequate. One dependent model has low finished-bike stock, but the part itself does not yet need replenishment.",
+        "quantity_explanation": "An order triggers when inventory position falls to 30 or below. Current stock of 93 provides 4.65 cycles of cover at the assumed consumption rate.",
+        "source": "LLM"
+      },
+      "final_route": "NONE",
+      "review_reasons": [],
+      "concerns": [],
+      "violations": []
+    }
+  ],
+  "totals": {
+    "parts": 23,
+    "reorder_lines": 1,
+    "reorder_units": 109,
+    "auto_lines": 0,
+    "auto_units": 0,
+    "human_lines": 1,
+    "blocked_lines": 0
+  },
+  "run_flags": [
+    "SUPPLIER_CONCENTRATION: Mavic supplies 3 shared/critical parts",
+    "SUPPLIER_CONCENTRATION: Look supplies 3 shared/critical parts",
+    "SUPPLIER_CONCENTRATION: Shimano supplies 3 shared/critical parts"
+  ],
+  "data_issues": [],
+  "summary": {
+    "headline": "One order for 109 units of Precision Gear Set requires your approval. Critical risk: this part serves all 9 bike models and current stock of 26 units is well below reorder point, creating immediate stockout exposure across the entire product line.",
+    "top_risks": [
+      "Precision Gear Set stockout risk: used by all 9 models, on hand 26 vs reorder point 90",
+      "Five parts awaiting open POs: Anti-Slip Pedals, Hydraulic Suspension Fork, Lightweight Alloy Wheels, Lightweight Steel Frame, Rear Derailleur Mechanism",
+      "Supplier concentration: Mavic, Look, and Shimano each supply 3 shared or critical parts",
+      "Four parts flagged FG_EXPOSED with finished goods exposure"
+    ],
+    "capital_notes": [
+      "All 109 units of Precision Gear Set directed to HUMAN route for immediate fulfillment",
+      "Seven parts held above reorder point due to excess inventory; no cash tied up in new orders for these",
+      "Five parts on hold pending open PO resolution before reorder can proceed"
+    ]
+  },
+  "llm_usage": {
+    "input_tokens": 132143,
+    "output_tokens": 4838,
+    "llm_calls": 27,
+    "fallbacks": 0
+  }
+}

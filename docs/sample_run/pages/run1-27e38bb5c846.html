@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Run 27e38bb5c846</title>
+  <script src="/static/htmx.min.js"></script><!-- htmx 2.0.4, vendored (sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+) -->
+  <style>
+    :root { --fg:#1d2433; --muted:#667085; --line:#e4e7ec; --bg:#f7f8fa; --card:#fff;
+            --red:#b42318; --amber:#b54708; --green:#067647; --blue:#175cd3; }
+    * { box-sizing: border-box; }
+    body { margin:0; font:14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; color:var(--fg); background:var(--bg); }
+    header { background:#101828; color:#fff; padding:10px 24px; display:flex; gap:24px; align-items:center; flex-wrap:wrap; }
+    header a { color:#fff; text-decoration:none; opacity:.85; } header a:hover { opacity:1; }
+    header .mode { margin-left:auto; font-size:12px; padding:2px 8px; border-radius:10px; background:#344054; }
+    header .mode.SANDBOX { background:var(--blue); } header .mode.PRODUCTION { background:var(--red); }
+    main { max-width:1200px; margin:0 auto; padding:20px 24px 60px; }
+    h1 { font-size:20px; margin:4px 0 12px; } h2 { font-size:16px; margin:28px 0 10px; }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:14px 16px; margin-bottom:12px; }
+    .muted { color:var(--muted); } .small { font-size:12px; }
+    table { width:100%; border-collapse:collapse; background:var(--card); }
+    th, td { text-align:left; padding:7px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+    th { font-size:12px; color:var(--muted); font-weight:600; }
+    .table-wrap { overflow-x:auto; border:1px solid var(--line); border-radius:8px; }
+    .badge { display:inline-block; font-size:11px; font-weight:600; padding:1px 7px; border-radius:9px; background:#eef0f3; }
+    .BLOCK, .SUBMITTED_MISMATCH, .UNKNOWN, .FAILED { background:#fee4e2; color:var(--red); }
+    .HUMAN, .PENDING_APPROVAL, .STALE { background:#fef0c7; color:var(--amber); }
+    .AUTO, .APPROVED, .SUBMITTED, .RECEIVED { background:#dcfae6; color:var(--green); }
+    .NONE, .REJECTED, .SUPERSEDED, .EXPIRED, .CANCELLED { background:#eef0f3; color:var(--muted); }
+    form.inline { display:inline-flex; gap:6px; align-items:center; flex-wrap:wrap; margin:4px 12px 4px 0; }
+    input[type=number] { width:80px; } input[type=text] { width:220px; }
+    input, button { font:inherit; padding:4px 8px; border:1px solid #d0d5dd; border-radius:6px; }
+    button { background:#fff; cursor:pointer; } button.primary { background:#101828; color:#fff; border-color:#101828; }
+    button.danger { color:var(--red); }
+    .error { color:var(--red); font-weight:600; margin-top:6px; }
+    details summary { cursor:pointer; } code, pre { font:12px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    pre { white-space:pre-wrap; background:#fff; border:1px solid var(--line); border-radius:8px; padding:12px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:10px; }
+    .stat b { display:block; font-size:22px; }
+  </style>
+</head>
+<body>
+  <header>
+    <strong>Lato reorder agent</strong>
+    <a href="/">Runs</a><a href="/ledger">PO ledger</a><a href="/calibration">Calibration</a>
+    <span class="mode SANDBOX">SANDBOX · signed in as approver</span>
+  </header>
+  <main>
+<h1>Run 27e38bb5c846</h1>
+<p class="muted small">Created 2026-09-25 16:07 UTC · mode SANDBOX ·
+  explanations: claude-haiku-4-5 (prompt 34cc556cbbf23ba2) · policy 1.0.0 (<code>3315430fb6b5ff46</code>) ·
+  snapshot <code>efb956ef6b94</code></p>
+
+<div class="grid">
+  <div class="card stat"><b>6</b>orders · 461 units</div>
+  <div class="card stat"><b>3</b>need a human</div>
+  <div class="card stat"><b>3</b>auto-approved · 117 units</div>
+  <div class="card stat"><b>0</b>blocked</div>
+  <div class="card stat"><b>23</b>parts reviewed</div>
+</div>
+<div class="card small"><span class="badge HUMAN">run flag</span> SUPPLIER_CONCENTRATION: Mavic supplies 3 shared/critical parts</div><div class="card small"><span class="badge HUMAN">run flag</span> SUPPLIER_CONCENTRATION: Look supplies 3 shared/critical parts</div><div class="card small"><span class="badge HUMAN">run flag</span> SUPPLIER_CONCENTRATION: Shimano supplies 3 shared/critical parts</div>
+
+
+<div class="card">
+  <h2>Analyst briefing</h2>
+  <p><strong>Six reorder lines totaling 461 units, three require human approval. Critical risk: Hydraulic Suspension Fork, Rear Derailleur, and Precision Gear Set all used across all 9 bike models with severe stockout exposure.</strong></p>
+  <p class="small">Top risks</p><ul class="small"><li>Hydraulic Suspension Fork (T1_CRITICAL, 9 models, on-hand 16 vs reorder point 90): immediate production halt risk</li><li>Rear Derailleur Mechanism (T1_CRITICAL, 9 models, on-hand 19 vs reorder point 90): immediate production halt risk</li><li>Precision Gear Set (T1_CRITICAL, 9 models, on-hand 26 vs reorder point 90): immediate production halt risk</li><li>Supplier concentration: Mavic, Look, and Shimano each supply 3 shared/critical parts</li></ul>
+  <p class="small">Where the units go</p><ul class="small"><li>344 units committed to T1_CRITICAL parts (three forks, derailleurs, gear sets) that gate all production</li><li>117 units for T2_SHARED parts (pedals, wheels, frames) supporting 2-4 models each</li><li>Seven parts held above reorder point due to excess inventory; four parts with finished-goods exposure flagged for monitoring</li></ul>
+  <p class="muted small">Written by the LLM from the plan below; every number in it was checked against the plan. It cannot change any order.</p>
+</div>
+
+
+<h2>Awaiting your approval (0)</h2>
+
+  <p class="muted">Nothing awaiting approval.</p>
+
+
+
+
+
+  
+  
+  <h2>Auto-approved submission</h2>
+  <div class="card small">
+    
+      <div><span class="badge SUBMITTED">SUBMITTED</span> Anti-Slip Pedals × 66
+        → <code>Ant-812</code> <span class="muted">Purchase order Ant-812 for Anti-Slip Pedals from Look created for 66 items.</span></div><div><span class="badge SUBMITTED">SUBMITTED</span> Lightweight Alloy Wheels × 35
+        → <code>Lig-396</code> <span class="muted">Purchase order Lig-396 for Lightweight Alloy Wheels from Mavic created for 35 items.</span></div><div><span class="badge SUBMITTED">SUBMITTED</span> Lightweight Steel Frame × 16
+        → <code>Lig-199</code> <span class="muted">Purchase order Lig-199 for Lightweight Steel Frame from Giant created for 16 items.</span></div>
+      
+    
+  </div>
+  
+
+  
+  
+  <h2>Submission after review</h2>
+  <div class="card small">
+    
+      <div><span class="badge SUBMITTED">SUBMITTED</span> Hydraulic Suspension Fork × 119
+        → <code>Hyd-329</code> <span class="muted">Purchase order Hyd-329 for Hydraulic Suspension Fork from Fox created for 119 items.</span></div><div><span class="badge SUBMITTED">SUBMITTED</span> Rear Derailleur Mechanism × 120
+        → <code>Rea-835</code> <span class="muted">Purchase order Rea-835 for Rear Derailleur Mechanism from SRAM created for 120 items.</span></div>
+      
+    
+  </div>
+  
+
+
+<h2>Every part, with its reasoning</h2>
+<div class="table-wrap">
+<table>
+  <tr><th>Part</th><th>Tier</th><th>Stock</th><th>Decision</th><th>Qty</th><th>Route</th><th>Why</th></tr>
+  
+  <tr>
+    <td>Hydraulic Suspension Fork<div class="muted small">Fox · used by 9/9</div></td>
+    <td>CRITICAL</td>
+    <td>16</td>
+    <td>REORDER</td>
+    <td>119</td>
+    <td><span class="badge HUMAN">HUMAN</span>
+      <div><span class="badge SUBMITTED">SUBMITTED</span></div></td>
+    <td>
+      
+      <details>
+        <summary>Reorder: this fork is used by all 9 bike models in the catalogue and inventory position 16 is far below the reorder point of 90, creating immediate stockout risk that would halt production across the entire range.</summary>
+        <p>119 units = order-up-to level 135 minus inventory position 16. The order requires human approval because the part is CRITICAL and the quantity exceeds the auto-approve limit.</p>
+        <div class="small">Rules: <code title="CRITICAL: used by at least the configured share of bike models">TIER-1</code> <code title="Reorder: inventory position at or below the reorder point">TRIG-ROP</code> <code title="Quantity = order-up-to level minus inventory position">QTY-OUT</code> <code title="Human approval: part is CRITICAL">RTE-H-TIER</code> <code title="Human approval: quantity above the auto-approve limit">RTE-H-SIZE</code> </div>
+        
+        <pre>used by 9 of 9 bike models (share 1.00)
+D = K x q x f = 5 x 1 x 9 = 45 units/cycle
+ROP = ceil((LT + ss) x D) = ceil((1 + 1) x 45) = 90
+OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 1) x 45) = 135
+IP = on hand + on order = 16 + 0 = 16
+Q = OUT - IP = 135 - 16 = 119
+</pre>
+        
+        
+        
+        <div class="muted small">Explanation source: LLM · decision <code>5d6758f1b9d2da44</code></div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Rear Derailleur Mechanism<div class="muted small">SRAM · used by 9/9</div></td>
+    <td>CRITICAL</td>
+    <td>19</td>
+    <td>REORDER</td>
+    <td>116</td>
+    <td><span class="badge HUMAN">HUMAN</span>
+      <div><span class="badge SUBMITTED">SUBMITTED</span></div></td>
+    <td>
+      
+      <details>
+        <summary>Reorder: this rear derailleur is used by all 9 bike models in the catalogue. Inventory position 19 is far below the reorder point of 90, creating immediate stockout risk that would halt production across the entire range.</summary>
+        <p>116 units = order-up-to level 135 minus inventory position 19. The order exceeds the auto-approve limit and the part is CRITICAL, so it requires human approval.</p>
+        <div class="small">Rules: <code title="CRITICAL: used by at least the configured share of bike models">TIER-1</code> <code title="Reorder: inventory position at or below the reorder point">TRIG-ROP</code> <code title="Quantity = order-up-to level minus inventory position">QTY-OUT</code> <code title="Human approval: part is CRITICAL">RTE-H-TIER</code> <code title="Human approval: quantity above the auto-approve limit">RTE-H-SIZE</code> </div>
+        
+        <pre>used by 9 of 9 bike models (share 1.00)
+D = K x q x f = 5 x 1 x 9 = 45 units/cycle
+ROP = ceil((LT + ss) x D) = ceil((1 + 1) x 45) = 90
+OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 1) x 45) = 135
+IP = on hand + on order = 19 + 0 = 19
+Q = OUT - IP = 135 - 19 = 116
+</pre>
+        
+        
+        
+        <div class="muted small">Explanation source: LLM · decision <code>f3ea5f870c8edf31</code></div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Precision Gear Set<div class="muted small">Shimano · used by 9/9</div></td>
+    <td>CRITICAL</td>
+    <td>26</td>
+    <td>REORDER</td>
+    <td>109</td>
+    <td><span class="badge HUMAN">HUMAN</span>
+      <div><span class="badge FAILED">FAILED</span></div></td>
+    <td>
+      
+      <details>
+        <summary>Reorder: this gear set is used by all 9 bike models in the catalogue and inventory position 26 is well below the reorder point of 90, creating immediate stockout risk across the entire product line.</summary>
+        <p>109 units = order-up-to level 135 minus inventory position 26. The order requires human approval because the part is CRITICAL and the quantity exceeds the auto-approve limit.</p>
+        <div class="small">Rules: <code title="CRITICAL: used by at least the configured share of bike models">TIER-1</code> <code title="Reorder: inventory position at or below the reorder point">TRIG-ROP</code> <code title="Quantity = order-up-to level minus inventory position">QTY-OUT</code> <code title="Human approval: part is CRITICAL">RTE-H-TIER</code> <code title="Human approval: quantity above the auto-approve limit">RTE-H-SIZE</code> </div>
+        
+        <pre>used by 9 of 9 bike models (share 1.00)
+D = K x q x f = 5 x 1 x 9 = 45 units/cycle
+ROP = ceil((LT + ss) x D) = ceil((1 + 1) x 45) = 90
+OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 1) x 45) = 135
+IP = on hand + on order = 26 + 0 = 26
+Q = OUT - IP = 135 - 26 = 109
+</pre>
+        
+        
+        
+        <div class="muted small">Explanation source: LLM · decision <code>714c14eab18a83c8</code></div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Anti-Slip Pedals<div class="muted small">Look · used by 4/9</div></td>
+    <td>SHARED</td>
+    <td>34</td>
+    <td>REORDER</td>
+    <td>66</td>
+    <td><span class="badge AUTO">AUTO</span>
+      <div><span class="badge SUBMITTED">SUBMITTED</span></div></td>
+    <td>
+      
+      <details>
+        <summary>Reorder: four bike models depend on this part and inventory position 34 has fallen below the reorder point of 60, with one dependent model at low finished-bike stock. The order is small and flag-free, so it is auto-approved.</summary>
+        <p>66 = order-up-to 100 minus inventory position 34. The order-up-to level is set by the SHARED tier safety cover and lead time. Two units per bike are fitted.</p>
+        <div class="small">Rules: <code title="SHARED: used by 2 or more models, below the critical share">TIER-2</code> <code title="Reorder: inventory position at or below the reorder point">TRIG-ROP</code> <code title="Quantity = order-up-to level minus inventory position">QTY-OUT</code> <code title="Auto-approved: non-critical, in stock, within size caps and run budget, no flags">RTE-AUTO</code> </div>
+        
+        <pre>used by 4 of 9 bike models (share 0.44)
+D = K x q x f = 5 x 2 x 4 = 40 units/cycle
+ROP = ceil((LT + ss) x D) = ceil((1 + 0.5) x 40) = 60
+OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0.5) x 40) = 100
+IP = on hand + on order = 34 + 0 = 34
+Q = OUT - IP = 100 - 34 = 66
+</pre>
+        
+        
+        
+        <div class="muted small">Explanation source: LLM · decision <code>f46e15b318902b83</code></div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Lightweight Alloy Wheels<div class="muted small">Mavic · used by 2/9</div></td>
+    <td>SHARED</td>
+    <td>15</td>
+    <td>REORDER</td>
+    <td>35</td>
+    <td><span class="badge AUTO">AUTO</span>
+      <div><span class="badge SUBMITTED">SUBMITTED</span></div></td>
+    <td>
+      
+      <details>
+        <summary>Reorder: two bike models depend on this part and inventory position 15 is below the reorder point of 30, triggering a stockout risk. Both dependent models have healthy finished-bike stock, so the order is routine and auto-approved.</summary>
+        <p>35 = order-up-to 50 minus inventory position 15. The quantity is exact and within auto-approve limits. Covers 2.5 cycles of demand after delivery.</p>
+        <div class="small">Rules: <code title="SHARED: used by 2 or more models, below the critical share">TIER-2</code> <code title="Reorder: inventory position at or below the reorder point">TRIG-ROP</code> <code title="Quantity = order-up-to level minus inventory position">QTY-OUT</code> <code title="Auto-approved: non-critical, in stock, within size caps and run budget, no flags">RTE-AUTO</code> </div>
+        
+        <pre>used by 2 of 9 bike models (share 0.22)
+D = K x q x f = 5 x 2 x 2 = 20 units/cycle
+ROP = ceil((LT + ss) x D) = ceil((1 + 0.5) x 20) = 30
+OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0.5) x 20) = 50
+IP = on hand + on order = 15 + 0 = 15
+Q = OUT - IP = 50 - 15 = 35
+</pre>
+        
+        
+        
+        <div class="muted small">Explanation source: LLM · decision <code>8faef95d1afba782</code></div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Lightweight Steel Frame<div class="muted small">Giant · used by 3/9</div></td>
+    <td>SHARED</td>
+    <td>22</td>
+    <td>REORDER</td>
+    <td>16</td>
+    <td><span class="badge AUTO">AUTO</span>
+      <div><span class="badge SUBMITTED">SUBMITTED</span></div></td>
+    <td>
+      
+      <details>
+        <summary>Reorder: three bike models depend on this frame and inventory position 22 has fallen to the reorder point of 23, with one dependent model at low finished-bike stock. The order of 16 units is small and flag-free, so it is auto-approved.</summary>
+        <p>16 = order-up-to level 38 minus inventory position 22. The SHARED tier safety cover and lead time determine the order-up-to level.</p>
+        <div class="small">Rules: <code title="SHARED: used by 2 or more models, below the critical share">TIER-2</code> <code title="Reorder: inventory position at or below the reorder point">TRIG-ROP</code> <code title="Quantity = order-up-to level minus inventory position">QTY-OUT</code> <code title="Auto-approved: non-critical, in stock, within size caps and run budget, no flags">RTE-AUTO</code> </div>
+        
+        <pre>used by 3 of 9 bike models (share 0.33)
+D = K x q x f = 5 x 1 x 3 = 15 units/cycle
+ROP = ceil((LT + ss) x D) = ceil((1 + 0.5) x 15) = 23
+OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0.5) x 15) = 38
+IP = on hand + on order = 22 + 0 = 22
+Q = OUT - IP = 38 - 22 = 16
+</pre>
+        
+        
+        
+        <div class="muted small">Explanation source: LLM · decision <code>182e4aa9fc0f0e67</code></div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Advanced Front Derailleur<div class="muted small">Shimano · used by 2/9</div></td>
+    <td>SHARED</td>
+    <td>97</td>
+    <td>NO_ORDER</td>
+    <td></td>
+    <td><span class="badge NONE">NONE</span>
+      </td>
+    <td>
+      
+      <details>
+        <summary>No order: this part is used by 2 of 9 bike models and inventory position 97 is well above the reorder point of 15, so stock is adequate. The part is flagged as excess.</summary>
+        <p>An order would trigger only if inventory position falls to 15 or below. Current stock of 97 provides 9.7 cycles of cover at the assumed consumption rate.</p>
+        <div class="small">Rules: <code title="SHARED: used by 2 or more models, below the critical share">TIER-2</code> <code title="No order: inventory position above the reorder point">HOLD-ABOVE-ROP</code> </div>
+        <div class="small">Flags: <span class="badge">EXCESS</span> </div>
+        <pre>used by 2 of 9 bike models (share 0.22)
+D = K x q x f = 5 x 1 x 2 = 10 units/cycle
+ROP = ceil((LT + ss) x D) = ceil((1 + 0.5) x 10) = 15
+OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0.5) x 10) = 25
+IP = on hand + on order = 97 + 0 = 97
+</pre>
+        
+        
+        
+        <div class="muted small">Explanation source: LLM · decision <code>f24b9b4c8c272cd4</code></div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>All-Terrain Carbon Frame<div class="muted small">Giant · used by 1/9</div></td>
+    <td>SINGLE</td>
+    <td>28</td>
+    <td>NO_ORDER</td>
+    <td></td>
+    <td><span class="badge NONE">NONE</span>
+      </td>
+    <td>
+      
+      <details>
+        <summary>No order: only the EveryDay model uses this frame and inventory position 28 is well above the reorder point of 5, so stock is adequate. The EXCESS flag confirms ample supply.</summary>
+        <p>An order would trigger only if inventory position falls to 5 or below. Current stock of 28 covers 5.6 cycles of demand.</p>
+        <div class="small">Rules: <code title="SINGLE: used by exactly one model">TIER-3</code> <code title="No order: inventory position above the reorder point">HOLD-ABOVE-ROP</code> </div>
+        <div class="small">Flags: <span class="badge">EXCESS</span> </div>
+        <pre>used by 1 of 9 bike models (share 0.11)
+D = K x q x f = 5 x 1 x 1 = 5 units/cycle
+ROP = ceil((LT + ss) x D) = ceil((1 + 0) x 5) = 5
+OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0) x 5) = 10
+IP = on hand + on order = 28 + 0 = 28
+</pre>
+        
+        
+        
+        <div class="muted small">Explanation source: LLM · decision <code>a6e7256db0214996</code></div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Carbon Fiber Frame<div class="muted small">Trek · used by 1/9</div></td>
+    <td>SINGLE</td>
+    <td>35</td>
+    <td>NO_ORDER</td>
+    <td></td>
+    <td><span class="badge NONE">NONE</span>
+      </td>
+    <td>
+      
+      <details>
+        <summary>No order: only the Carrera Subway model uses this frame and inventory position 35 is well above the reorder point of 5, so stock is adequate.</summary>
+        <p>An order triggers when inventory position falls to 5 or below. Current stock of 35 covers 7 cycles of demand.</p>
+        <div class="small">Rules: <code title="SINGLE: used by exactly one model">TIER-3</code> <code title="No order: inventory position above the reorder point">HOLD-ABOVE-ROP</code> </div>
+        <div class="small">Flags: <span class="badge">EXCESS</span> </div>
+        <pre>used by 1 of 9 bike models (share 0.11)
+D = K x q x f = 5 x 1 x 1 = 5 units/cycle
+ROP = ceil((LT + ss) x D) = ceil((1 + 0) x 5) = 5
+OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0) x 5) = 10
+IP = on hand + on order = 35 + 0 = 35
+</pre>
+        
+        
+        
+        <div class="muted small">Explanation source: LLM · decision <code>eba63a98d136b869</code></div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Durable Alloy Wheels<div class="muted small">Mavic · used by 1/9</div></td>
+    <td>SINGLE</td>
+    <td>13</td>
+    <td>NO_ORDER</td>
+    <td></td>
+    <td><span class="badge NONE">NONE</span>
+      </td>
+    <td>
+      
+      <details>
+        <summary>No order: only the Carrera Subway model uses this part, and inventory position 13 is above the reorder point of 10, so stock is adequate for the current cycle.</summary>
+        <p>An order would trigger when inventory position falls to 10 or below. Current stock of 13 covers 1.3 cycles of demand at 10 units per cycle.</p>
+        <div class="small">Rules: <code title="SINGLE: used by exactly one model">TIER-3</code> <code title="No order: inventory position above the reorder point">HOLD-ABOVE-ROP</code> </div>
+        
+        <pre>used by 1 of 9 bike models (share 0.11)
+D = K x q x f = 5 x 2 x 1 = 10 units/cycle
+ROP = ceil((LT + ss) x D) = ceil((1 + 0) x 10) = 10
+OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0) x 10) = 20
+IP = on hand + on order = 13 + 0 = 13
+</pre>
+        
+        
+        
+        <div class="muted small">Explanation source: LLM · decision <code>b01b77a0021a2c25</code></div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Endurance Alloy Wheels<div class="muted small">Mavic · used by 1/9</div></td>
+    <td>SINGLE</td>
+    <td>78</td>
+    <td>NO_ORDER</td>
+    <td></td>
+    <td><span class="badge NONE">NONE</span>
+      </td>
+    <td>
+      
+      <details>
+        <summary>No order: this part is used by only one bike model and inventory position 78 is well above the reorder point of 10, so stock is adequate and no reorder is needed.</summary>
+        <p>An order would trigger only if inventory position falls to 10 or below. Current stock of 78 covers 7.8 cycles of demand.</p>
+        <div class="small">Rules: <code title="SINGLE: used by exactly one model">TIER-3</code> <code title="No order: inventory position above the reorder point">HOLD-ABOVE-ROP</code> </div>
+        <div class="small">Flags: <span class="badge">EXCESS</span> </div>
+        <pre>used by 1 of 9 bike models (share 0.11)
+D = K x q x f = 5 x 2 x 1 = 10 units/cycle
+ROP = ceil((LT + ss) x D) = ceil((1 + 0) x 10) = 10
+OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0) x 10) = 20
+IP = on hand + on order = 78 + 0 = 78
+</pre>
+        
+        
+        
+        <div class="muted small">Explanation source: LLM · decision <code>fdd45a835e5aa2d4</code></div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Endurance Carbon Frame<div class="muted small">Specialized · used by 2/9</div></td>
+    <td>SHARED</td>
+    <td>30</td>
+    <td>NO_ORDER</td>
+    <td></td>
+    <td><span class="badge NONE">NONE</span>
+      </td>
+    <td>
+      
+      <details>
+        <summary>No order: this frame is used by 2 of 9 bike models and inventory position 30 is above the reorder point of 15, so stock is adequate. However, one dependent model (CityWide Chill) has low finished-bike stock, so monitor closely.</summary>
+        <p>An order triggers when inventory position falls to 15 or below. Current position of 30 provides 3 cycles of cover at the assumed demand rate.</p>
+        <div class="small">Rules: <code title="SHARED: used by 2 or more models, below the critical share">TIER-2</code> <code title="No order: inventory position above the reorder point">HOLD-ABOVE-ROP</code> </div>
+        <div class="small">Flags: <span class="badge">FG_EXPOSED</span> </div>
+        <pre>used by 2 of 9 bike models (share 0.22)
+D = K x q x f = 5 x 1 x 2 = 10 units/cycle
+ROP = ceil((LT + ss) x D) = ceil((1 + 0.5) x 10) = 15
+OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0.5) x 10) = 25
+IP = on hand + on order = 30 + 0 = 30
+</pre>
+        
+        
+        
+        <div class="muted small">Explanation source: LLM · decision <code>0e9ca21003b80760</code></div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Front Derailleur Mechanism<div class="muted small">Campagnolo · used by 1/9</div></td>
+    <td>SINGLE</td>
+    <td>34</td>
+    <td>NO_ORDER</td>
+    <td></td>
+    <td><span class="badge NONE">NONE</span>
+      </td>
+    <td>
+      
+      <details>
+        <summary>No order: only the Carrera Subway model uses this front derailleur and inventory position 34 is well above the reorder point of 5, so stock is adequate.</summary>
+        <p>An order would trigger only when inventory position falls to 5 or below. Current stock of 34 provides 6.8 cycles of cover.</p>
+        <div class="small">Rules: <code title="SINGLE: used by exactly one model">TIER-3</code> <code title="No order: inventory position above the reorder point">HOLD-ABOVE-ROP</code> </div>
+        <div class="small">Flags: <span class="badge">EXCESS</span> </div>
+        <pre>used by 1 of 9 bike models (share 0.11)
+D = K x q x f = 5 x 1 x 1 = 5 units/cycle
+ROP = ceil((LT + ss) x D) = ceil((1 + 0) x 5) = 5
+OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0) x 5) = 10
+IP = on hand + on order = 34 + 0 = 34
+</pre>
+        
+        
+        
+        <div class="muted small">Explanation source: LLM · decision <code>8b87ff5d69d95fce</code></div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Gel Comfort Seat<div class="muted small">Selle Italia · used by 9/9</div></td>
+    <td>CRITICAL</td>
+    <td>99</td>
+    <td>NO_ORDER</td>
+    <td></td>
+    <td><span class="badge NONE">NONE</span>
+      </td>
+    <td>
+      
+      <details>
+        <summary>No order: this part is used by all 9 bike models in the catalogue, making it CRITICAL. Inventory position of 99 units is above the reorder point of 90, so stock is adequate for now despite two dependent models running low on finished bikes.</summary>
+        <p>An order triggers when inventory position falls to 90 or below. Current position of 99 provides 2.2 cycles of cover at the assumed consumption rate.</p>
+        <div class="small">Rules: <code title="CRITICAL: used by at least the configured share of bike models">TIER-1</code> <code title="No order: inventory position above the reorder point">HOLD-ABOVE-ROP</code> </div>
+        <div class="small">Flags: <span class="badge">WATCH</span> </div>
+        <pre>used by 9 of 9 bike models (share 1.00)
+D = K x q x f = 5 x 1 x 9 = 45 units/cycle
+ROP = ceil((LT + ss) x D) = ceil((1 + 1) x 45) = 90
+OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 1) x 45) = 135
+IP = on hand + on order = 99 + 0 = 99
+</pre>
+        
+        
+        
+        <div class="muted small">Explanation source: LLM · decision <code>bb9db3cfdae2f8ef</code></div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>High-Performance Derailleur<div class="muted small">Shimano · used by 3/9</div></td>
+    <td>SHARED</td>
+    <td>64</td>
+    <td>NO_ORDER</td>
+    <td></td>
+    <td><span class="badge NONE">NONE</span>
+      </td>
+    <td>
+      
+      <details>
+        <summary>No order: this part is used by 3 of 9 bike models and inventory position 64 is well above the reorder point of 23, so stock is adequate. One dependent model has low finished-bike stock, but the part itself is not at risk.</summary>
+        <p>An order would trigger when inventory position falls to 23 or below. Current stock of 64 covers 4.27 cycles of demand at 15 units per cycle.</p>
+        <div class="small">Rules: <code title="SHARED: used by 2 or more models, below the critical share">TIER-2</code> <code title="No order: inventory position above the reorder point">HOLD-ABOVE-ROP</code> </div>
+        
+        <pre>used by 3 of 9 bike models (share 0.33)
+D = K x q x f = 5 x 1 x 3 = 15 units/cycle
+ROP = ceil((LT + ss) x D) = ceil((1 + 0.5) x 15) = 23
+OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0.5) x 15) = 38
+IP = on hand + on order = 64 + 0 = 64
+</pre>
+        
+        
+        
+        <div class="muted small">Explanation source: LLM · decision <code>dfaa79821e01381c</code></div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>High-Traction Pedals<div class="muted small">Look · used by 2/9</div></td>
+    <td>SHARED</td>
+    <td>86</td>
+    <td>NO_ORDER</td>
+    <td></td>
+    <td><span class="badge NONE">NONE</span>
+      </td>
+    <td>
+      
+      <details>
+        <summary>No order: this part is used by 2 of 9 bike models and inventory position 86 is well above the reorder point of 30, so stock is adequate for current demand.</summary>
+        <p>An order would trigger when inventory position falls to 30 or below. Current stock of 86 covers 4.3 cycles of demand at 20 units per cycle.</p>
+        <div class="small">Rules: <code title="SHARED: used by 2 or more models, below the critical share">TIER-2</code> <code title="No order: inventory position above the reorder point">HOLD-ABOVE-ROP</code> </div>
+        
+        <pre>used by 2 of 9 bike models (share 0.22)
+D = K x q x f = 5 x 2 x 2 = 20 units/cycle
+ROP = ceil((LT + ss) x D) = ceil((1 + 0.5) x 20) = 30
+OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0.5) x 20) = 50
+IP = on hand + on order = 86 + 0 = 86
+</pre>
+        
+        
+        
+        <div class="muted small">Explanation source: LLM · decision <code>649cfcbb71d5c6e0</code></div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Performance Front Derailleur<div class="muted small">Shimano · used by 1/9</div></td>
+    <td>SINGLE</td>
+    <td>7</td>
+    <td>NO_ORDER</td>
+    <td></td>
+    <td><span class="badge NONE">NONE</span>
+      </td>
+    <td>
+      
+      <details>
+        <summary>No order: only the EveryDay model uses this derailleur and inventory position 7 is above the reorder point of 5, so stock is adequate for the current cycle.</summary>
+        <p>An order would trigger only if inventory position falls to 5 or below. Current position of 7 covers 1.4 cycles of demand.</p>
+        <div class="small">Rules: <code title="SINGLE: used by exactly one model">TIER-3</code> <code title="No order: inventory position above the reorder point">HOLD-ABOVE-ROP</code> </div>
+        
+        <pre>used by 1 of 9 bike models (share 0.11)
+D = K x q x f = 5 x 1 x 1 = 5 units/cycle
+ROP = ceil((LT + ss) x D) = ceil((1 + 0) x 5) = 5
+OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0) x 5) = 10
+IP = on hand + on order = 7 + 0 = 7
+</pre>
+        
+        
+        
+        <div class="muted small">Explanation source: LLM · decision <code>1201bf3d2b4e73d4</code></div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Pro-Grade Front Derailleur<div class="muted small">Campagnolo · used by 2/9</div></td>
+    <td>SHARED</td>
+    <td>51</td>
+    <td>NO_ORDER</td>
+    <td></td>
+    <td><span class="badge NONE">NONE</span>
+      </td>
+    <td>
+      
+      <details>
+        <summary>No order: this derailleur is used by 2 of 9 bike models and inventory position 51 is well above the reorder point of 15, so stock is adequate. One dependent model has low finished-bike stock, but the part itself is not at risk.</summary>
+        <p>An order would trigger only if inventory position falls to 15 or below. Current stock of 51 covers 5.1 cycles of demand at the SHARED safety level.</p>
+        <div class="small">Rules: <code title="SHARED: used by 2 or more models, below the critical share">TIER-2</code> <code title="No order: inventory position above the reorder point">HOLD-ABOVE-ROP</code> </div>
+        <div class="small">Flags: <span class="badge">EXCESS</span> <span class="badge">FG_EXPOSED</span> </div>
+        <pre>used by 2 of 9 bike models (share 0.22)
+D = K x q x f = 5 x 1 x 2 = 10 units/cycle
+ROP = ceil((LT + ss) x D) = ceil((1 + 0.5) x 10) = 15
+OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0.5) x 10) = 25
+IP = on hand + on order = 51 + 0 = 51
+</pre>
+        
+        
+        
+        <div class="muted small">Explanation source: LLM · decision <code>d8d03c9e2b0954cf</code></div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Racing Alloy Wheels<div class="muted small">Mavic · used by 2/9</div></td>
+    <td>SHARED</td>
+    <td>92</td>
+    <td>NO_ORDER</td>
+    <td></td>
+    <td><span class="badge NONE">NONE</span>
+      </td>
+    <td>
+      
+      <details>
+        <summary>No order: this part is used by 2 of 9 bike models and inventory position 92 is well above the reorder point of 30, so stock is adequate. One dependent model has low finished-bike stock, but the part itself does not yet need reordering.</summary>
+        <p>An order triggers when inventory position falls to 30 or below. Current stock of 92 covers 4.6 cycles of demand at 20 units per cycle.</p>
+        <div class="small">Rules: <code title="SHARED: used by 2 or more models, below the critical share">TIER-2</code> <code title="No order: inventory position above the reorder point">HOLD-ABOVE-ROP</code> </div>
+        <div class="small">Flags: <span class="badge">FG_EXPOSED</span> </div>
+        <pre>used by 2 of 9 bike models (share 0.22)
+D = K x q x f = 5 x 2 x 2 = 20 units/cycle
+ROP = ceil((LT + ss) x D) = ceil((1 + 0.5) x 20) = 30
+OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0.5) x 20) = 50
+IP = on hand + on order = 92 + 0 = 92
+</pre>
+        
+        
+        
+        <div class="muted small">Explanation source: LLM · decision <code>ec3c863a0e599795</code></div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Reinforced Alloy Wheels<div class="muted small">Mavic · used by 3/9</div></td>
+    <td>SHARED</td>
+    <td>91</td>
+    <td>NO_ORDER</td>
+    <td></td>
+    <td><span class="badge NONE">NONE</span>
+      </td>
+    <td>
+      
+      <details>
+        <summary>No order: three bike models use these wheels and inventory position 91 is well above the reorder point of 45, so stock is adequate. One dependent model has low finished-bike stock, but the part itself is not at risk.</summary>
+        <p>An order would trigger when inventory position falls to 45 or below. Current position of 91 covers 3.03 cycles of demand at 30 units per cycle.</p>
+        <div class="small">Rules: <code title="SHARED: used by 2 or more models, below the critical share">TIER-2</code> <code title="No order: inventory position above the reorder point">HOLD-ABOVE-ROP</code> </div>
+        
+        <pre>used by 3 of 9 bike models (share 0.33)
+D = K x q x f = 5 x 2 x 3 = 30 units/cycle
+ROP = ceil((LT + ss) x D) = ceil((1 + 0.5) x 30) = 45
+OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0.5) x 30) = 75
+IP = on hand + on order = 91 + 0 = 91
+</pre>
+        
+        
+        
+        <div class="muted small">Explanation source: LLM · decision <code>2e68a67dfd2dbe0a</code></div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Reinforced Carbon Frame<div class="muted small">Trek · used by 2/9</div></td>
+    <td>SHARED</td>
+    <td>70</td>
+    <td>NO_ORDER</td>
+    <td></td>
+    <td><span class="badge NONE">NONE</span>
+      </td>
+    <td>
+      
+      <details>
+        <summary>No order: this frame is used by 2 of 9 bike models and inventory position of 70 units is well above the reorder point of 15, providing 7 cycles of cover. Reordering is not yet needed.</summary>
+        <p>An order would trigger when inventory position falls to 15 units or below. Current stock of 70 is sufficient for near-term demand.</p>
+        <div class="small">Rules: <code title="SHARED: used by 2 or more models, below the critical share">TIER-2</code> <code title="No order: inventory position above the reorder point">HOLD-ABOVE-ROP</code> </div>
+        <div class="small">Flags: <span class="badge">EXCESS</span> </div>
+        <pre>used by 2 of 9 bike models (share 0.22)
+D = K x q x f = 5 x 1 x 2 = 10 units/cycle
+ROP = ceil((LT + ss) x D) = ceil((1 + 0.5) x 10) = 15
+OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0.5) x 10) = 25
+IP = on hand + on order = 70 + 0 = 70
+</pre>
+        
+        
+        
+        <div class="muted small">Explanation source: LLM · decision <code>79ad8cfbbd84fb14</code></div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Trail-Ready Pedals<div class="muted small">Crankbrothers · used by 1/9</div></td>
+    <td>SINGLE</td>
+    <td>24</td>
+    <td>NO_ORDER</td>
+    <td></td>
+    <td><span class="badge NONE">NONE</span>
+      </td>
+    <td>
+      
+      <details>
+        <summary>No order: this part is used by only one bike model and inventory position 24 is well above the reorder point of 10, so stock is adequate.</summary>
+        <p>An order would trigger when inventory position falls to 10 or below. Current stock of 24 covers 2.4 cycles of demand at 10 units per cycle.</p>
+        <div class="small">Rules: <code title="SINGLE: used by exactly one model">TIER-3</code> <code title="No order: inventory position above the reorder point">HOLD-ABOVE-ROP</code> </div>
+        
+        <pre>used by 1 of 9 bike models (share 0.11)
+D = K x q x f = 5 x 2 x 1 = 10 units/cycle
+ROP = ceil((LT + ss) x D) = ceil((1 + 0) x 10) = 10
+OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0) x 10) = 20
+IP = on hand + on order = 24 + 0 = 24
+</pre>
+        
+        
+        
+        <div class="muted small">Explanation source: LLM · decision <code>9df6ddc891e9d21e</code></div>
+      </details>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Ultra-Grip Pedals<div class="muted small">Look · used by 2/9</div></td>
+    <td>SHARED</td>
+    <td>93</td>
+    <td>NO_ORDER</td>
+    <td></td>
+    <td><span class="badge NONE">NONE</span>
+      </td>
+    <td>
+      
+      <details>
+        <summary>No order: this part is used by 2 of 9 bike models and inventory position 93 is well above the reorder point of 30, so stock is adequate. One dependent model has low finished-bike stock, but the part itself does not yet need replenishment.</summary>
+        <p>An order triggers when inventory position falls to 30 or below. Current stock of 93 provides 4.65 cycles of cover at the assumed consumption rate.</p>
+        <div class="small">Rules: <code title="SHARED: used by 2 or more models, below the critical share">TIER-2</code> <code title="No order: inventory position above the reorder point">HOLD-ABOVE-ROP</code> </div>
+        <div class="small">Flags: <span class="badge">FG_EXPOSED</span> </div>
+        <pre>used by 2 of 9 bike models (share 0.22)
+D = K x q x f = 5 x 2 x 2 = 20 units/cycle
+ROP = ceil((LT + ss) x D) = ceil((1 + 0.5) x 20) = 30
+OUT = ceil((LT + R + ss) x D) = ceil((1 + 1 + 0.5) x 20) = 50
+IP = on hand + on order = 93 + 0 = 93
+</pre>
+        
+        
+        
+        <div class="muted small">Explanation source: LLM · decision <code>023e26cb6568fe78</code></div>
+      </details>
+    </td>
+  </tr>
+  
+</table>
+</div>
+</main>
+</body>
+</html>

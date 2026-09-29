@@ -1,0 +1,1 @@
+{% for e in events %}<div><code>{{ e.at[:19] }}</code> {{ e.kind }}{% if e.detail %} <span class="muted">{{ e.detail }}</span>{% endif %}</div>{% endfor %}

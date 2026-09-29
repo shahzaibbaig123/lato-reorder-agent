@@ -1,0 +1,37 @@
+# Lato reorder policy. The engine reads this file and the LLM prompt's POLICY REFERENCE is
+# rendered from it, so there is one source of truth. Change it only through review, and bump
+# `version` on every change.
+version: "1.0.0"
+calibrated_on: "efb956ef6b9451321aa92dcc1cee11919bb67fbe0e987c844fb249b6cac45338" # snapshot content_hash, 2026-09-25
+approved_by: "Mirza Shahzaib Baig (acting procurement), 2026-09-25" # see docs/CALIBRATION.md
+
+tiers:
+  # A part is CRITICAL when a stockout halts at least this share of the catalogue.
+  t1_min_share: 0.5
+  # Calibration guard: CRITICAL should hold roughly this fraction of parts.
+  t1_target_fraction: [0.15, 0.35]
+
+demand:
+  # There is no demand data. Assumed builds per bike model per review cycle; consumption of a
+  # part per cycle = k x units_per_bike x number of models using it. The one human-owned knob.
+  k_builds_per_model_per_cycle: 5
+  lead_time_cycles: 1
+  review_period_cycles: 1
+
+safety_cycles: # extra cover held on top of lead time, by tier
+  T1_CRITICAL: 1.0
+  T2_SHARED: 0.5
+  T3_SINGLE: 0.0
+
+ordering:
+  # "unit": order exactly what is needed. "crate": round up to whole crates (PartAmountPerCrate).
+  lot_mode: unit
+
+routing:
+  auto_max_units_per_po: 100
+  hard_max_units_per_po: 300
+  auto_budget_pos_per_run: 5
+  auto_budget_units_per_run: 300
+
+finished_goods:
+  fg_low: 36 # bikes at or below this stock count as exposed (25th percentile at calibration)
